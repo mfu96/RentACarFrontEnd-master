@@ -1,28 +1,30 @@
 <div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
-    <span class="visually-hidden">LoadingTTT...</span>
+    <span class="visually-hidden">Loading...</span>
   </div>
 
   <h4 *ngFor="let carDetail of carDetails">{{carDetail.brandName}} - {{carDetail.carName}}</h4>
 
 
-<!-- <div class="from-group">
+<div class="from-group">
   <div class="row">
     <div *ngFor="let carImage of carImages  "class="col-md-9">
-      <img src ="{{carImage.imagePath}}" class="d-block w-100" width="800"  height="400" alt="..." >
+      <img src ="https://localhost:44389/{{carImage.imagePath}}" class="d-block w-100" width="800"  height="400" alt="..." >
     </div>
   </div>
  
-</div> -->
+</div>
 
 
-<div class="from-group">
+<!-- <div class="from-group">
     <div class="row"> 
       <div *ngFor="let carImage of carImages"  >
    <img [src]="getImageSource(carImage)"  class="card-img-top" />
     </div>
   </div>
 
-</div>
+</div> -->
+
+
 <!-- <div id="carImageCarousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carImageCarousel" data-slide-to="0" class="active"></li>
@@ -34,7 +36,7 @@
       <div *ngFor="let img of carImage.imagePath let i=index"
            [ngClass]="setCarouselClassName(i)">
 
-        <img class="d-block w-100" src="https://localhost:44389{{carImage.imagePath}}">
+        <img class="d-block w-100" src="{{carImage.imagePath}}">
 
       </div>
     </span>
@@ -53,7 +55,7 @@
 <!-- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div *ngFor="let carImage of carImages; let i = index" [ngClass]="getSliderClassName(i)">
-      <img src="https://localhost:44389{{carImage.imagePath}}" class="d-block w-100" width="800" height="400" alt="..." />
+      <img src="https://localhost:44389/{{carImage.imagePath}}" class="d-block w-100" width="800" height="400" alt="..." />
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
