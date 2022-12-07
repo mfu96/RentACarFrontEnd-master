@@ -1,0 +1,13 @@
+<ul class="list-group">
+  <li [class]="getAllCategoryClass()" routerLink="/cars">Tüm Kategoriler</li>
+  <li
+    (click)="setCurrentCategory(category)"
+    routerLink="/cars/category/{{ category.categoryId }}"
+    *ngFor="let category of categories"
+    [class]="getCurrentCategoryClass(category)"
+  >
+    {{ category.categoryName }}
+  </li>
+  <br />
+  <h5 *ngIf="currentCategory">{{ currentCategory.categoryName }}</h5>
+</ul>

@@ -1,0 +1,166 @@
+<div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+  <h4 *ngFor="let carDetail of carDetails">{{carDetail.brandName}} - {{carDetail.carName}}</h4>
+
+
+<!-- <div class="from-group">
+  <div class="row">
+    <div *ngFor="let carImage of carImages  "class="col-md-9">
+      <img src ="{{carImage.imagePath}}" class="d-block w-100" width="800"  height="400" alt="..." >
+    </div>
+  </div>
+ 
+</div> -->
+
+
+<div class="from-group">
+    <div class="row"> 
+      <div *ngFor="let carImage of carImages"  >
+   <img [src]="getImageSource(carImage)"  class="card-img-top" />
+    </div>
+  </div>
+
+</div>
+<!-- <div id="carImageCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carImageCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#carImageCarousel" data-slide-to="1"></li>
+    <li data-target="#carImageCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <span *ngFor="let carImage of carImages">
+      <div *ngFor="let img of carImage.imagePath let i=index"
+           [ngClass]="setCarouselClassName(i)">
+
+        <img class="d-block w-100" src="https://localhost:44389{{carImage.imagePath}}">
+
+      </div>
+    </span>
+  </div>
+  <a class="carousel-control-prev" href="#carImageCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carImageCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div> -->
+
+
+<!-- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div *ngFor="let carImage of carImages; let i = index" [ngClass]="getSliderClassName(i)">
+      <img src="https://localhost:44389{{carImage.imagePath}}" class="d-block w-100" width="800" height="400" alt="..." />
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div> -->
+
+
+
+
+
+<!-- <div class="card">
+  <div class="card-body">
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div *ngFor="let carImage of carImages; let i = index" [ngClass]="getSliderClassName(i)">
+          <img src="https://localhost:44389{{carImage.imagePath}}" class="d-block w-100" width="800" height="400" alt="..." />
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <table class="table m-1">
+      <thead>
+        <tr>
+          <th scope="col" style="background-color: rgb(174, 204, 214); border-radius: 10px">
+            Brand
+          </th>
+          <th scope="col" style="background-color: rgb(148, 199, 218); border-radius: 10px">
+            Color
+          </th>
+          <th scope="col" style="background-color: rgb(139, 209, 233); border-radius: 10px">
+            Model Year
+          </th>
+          <th scope="col" style="background-color: rgb(130, 207, 233); border-radius: 10px">
+            Daily Price
+          </th>
+          <th scope="col" style="background-color: rgb(110, 207, 240); border-radius: 10px">
+            Daily Price + VAT
+          </th>
+          <th scope="col" style="background-color: rgb(98, 217, 250); border-radius: 10px">
+            Description
+          </th>
+          <th scope="col" style="background-color: rgb(84, 215, 252); border-radius: 10px">
+            Findex Score
+          </th>
+        </tr>
+
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of carDetails">
+          <td>{{detail.carId}}</td>
+          <td>{{detail.carName}}</td>
+          <td>{{detail.categoryName}}</td>
+          <td>{{detail.brandName}}</td>
+          <td>{{detail.colorName}}</td>
+          <td>{{detail.unitsInStock}}</td>
+      </tr>
+            
+       
+       
+      </tbody>
+    </table>
+
+
+  </div>
+</div> -->
+
+
+
+<table *ngIf="dataLoaded==true" class="table">
+     
+    <thead>
+        <tr>
+            <th>Araba No</th>
+            <th>Araba İsmi</th>
+            <th>Kategori</th>
+            <th>Marka</th>
+            <th>Renk</th>
+            <th>Stok Adedi</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let detail of carDetails">
+        <td>{{detail.carId}}</td>
+        <td>{{detail.carName}}</td>
+        <td>{{detail.categoryName}}</td>
+        <td>{{detail.brandName}}</td>
+        <td>{{detail.colorName}}</td>
+        <td>{{detail.unitsInStock}}</td>
+    </tr>
+
+    
+</table>

@@ -1,0 +1,24 @@
+<div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<style>
+  thead {color:green;}
+</style>
+<table *ngIf="dataLoaded == true" class="table">
+  <thead>
+    <tr>
+      <th>Müşteri No</th>
+      <th>Şirketi</th>
+      <th>İsim</th>
+      <th>Soyisim</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let detail of customerDetails">
+    <td>{{ detail.customerId }}</td>
+    <td>{{ detail.companyName }}</td>
+    <td>{{ detail.firstName }}</td>
+    <td>{{ detail.lastName }}</td>
+    <td>{{ detail.email }}</td>
+  </tr>
+</table>

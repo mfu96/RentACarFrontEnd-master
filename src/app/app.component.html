@@ -1,0 +1,26 @@
+<!-- Hoşgeldin  {{name}}
+<ul>
+  <li *ngFor="let brand of brands">
+{{brand.brandName}}
+  </li>
+</ul> -->
+<div class="container">
+  <app-navi></app-navi>
+  <div class="row">
+    <div class="col-md-3">
+      <app-category></app-category>
+      <app-brand></app-brand>
+      <app-color></app-color>
+    </div>
+
+    <div class="col-md-9">
+      <router-outlet></router-outlet>
+      
+      <!-- <app-rental-detail></app-rental-detail>
+      <app-car-detail></app-car-detail>
+      <app-customer-detail></app-customer-detail> -->
+    </div>
+  </div>
+
+  
+</div>
