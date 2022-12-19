@@ -10,6 +10,7 @@ import { RentalService } from 'src/app/services/rental.service';
 export class RentalDetailComponent implements OnInit {
 rentalDetails:RentalDetailDto[]=[];
 dataLoaded=false;
+filterText="";
 
   constructor(private rentalService:RentalService) { }
 

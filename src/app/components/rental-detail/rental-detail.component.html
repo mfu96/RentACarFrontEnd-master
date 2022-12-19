@@ -1,6 +1,17 @@
 <div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
     <span class="visually-hidden">Loading...</span>
+</div>
+
+<div class="mb-3">
+    <label for="filterText" class="form-label">Ürünü Aramak İçin Buraya Yazın</label>
+    <input type="text" [(ngModel)]="filterText"  class="form-control" id="filterText" placeholder="Opel">
+                        <!-- ngModel için FormsModel'i import etmeyi unutma -->
   </div>
+  <div *ngIf="filterText.length>2" class="alert alert-success">  
+                                    <!-- bu alert'ler ile ilgili 19. gün 44. dakika veya get/bootstrap -->
+  {{filterText}} aradınız
+  </div>
+
 <table *ngIf="dataLoaded==true" class="table">
     <thead>
         <tr>
@@ -10,12 +21,13 @@
             <th>Kiralama Tarihi</th>
             <th>Geri Dönüş Tarihi</th>
             <th>Günlük Ücreti</th>
+            <th></th>
         </tr>
     </thead>
-    <tr *ngFor="let detail of rentalDetails">
+    <tr *ngFor="let detail of rentalDetails  ">
         <td>{{detail.rentId}}</td>
-        <td>{{detail.carName}}</td>
-        <td>{{detail.companyName}}</td>
+        <td>{{detail.carName | uppercase}}</td>
+        <td>{{detail.companyName | uppercase}}</td>
         <td>{{detail.rentDate}}</td>
         <td>{{detail.returnDate}}</td>
         <td>{{detail.unitPrice}}</td>
