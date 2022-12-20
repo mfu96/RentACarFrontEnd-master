@@ -16,7 +16,9 @@ import { CarImageComponent } from './components/car-image/car-image.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { RentalDetailComponent } from './components/rental-detail/rental-detail.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FilterCarPipe } from './pipes/filter-car.pipe';
+import { FilterRentalPipe } from './pipes/filter-rental.pipe';
+import { FilterBrandPipe } from './pipes/filter-brand.pipe';
+import { FilterColorPipe } from './pipes/filter-color.pipe';
 
 
 
@@ -36,7 +38,10 @@ import { FilterCarPipe } from './pipes/filter-car.pipe';
     CarImageComponent,
     RentalComponent,
     RentalDetailComponent,
-    FilterCarPipe
+    FilterRentalPipe,
+    FilterBrandPipe,
+    FilterColorPipe
+    
     
   ],
   imports: [

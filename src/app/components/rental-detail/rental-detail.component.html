@@ -21,10 +21,12 @@
             <th>Kiralama Tarihi</th>
             <th>Geri Dönüş Tarihi</th>
             <th>Günlük Ücreti</th>
-            <th></th>
+            
         </tr>
     </thead>
-    <tr *ngFor="let detail of rentalDetails  ">
+    
+    <tbody>
+        <tr *ngFor="let detail of rentalDetails |filterRental:filterText ">
         <td>{{detail.rentId}}</td>
         <td>{{detail.carName | uppercase}}</td>
         <td>{{detail.companyName | uppercase}}</td>
@@ -32,4 +34,6 @@
         <td>{{detail.returnDate}}</td>
         <td>{{detail.unitPrice}}</td>
     </tr>
+    </tbody>
+    
 </table>
