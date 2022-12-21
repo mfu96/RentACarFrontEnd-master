@@ -1,6 +1,14 @@
+<select class="form-select" aria-label="Default select example">
+  <option selected>Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select>
+
 <div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
+
 <table *ngIf="dataLoaded==true" class="table">
     <thead>
         <tr>
@@ -15,7 +23,7 @@
             <th>Açıklama</th>
         </tr>
     </thead>
-    <tr *ngFor="let car of cars">
+      <tr *ngFor="let car of cars">
         <td>{{car.carId}}</td>
         <td (click)="setCurrentCar(car)"
         routerLink="/cars/detail/{{car.carId}}"
@@ -25,8 +33,10 @@
         <td>{{car.brandId}}</td>
         <td>{{car.colorId}}</td>
         <td>{{car.modelYear}}</td>
-        <td>{{car.unitPrice}}</td>
+        <td>{{car.unitPrice|currency:'₺'}}</td>
         <td>{{car.unitsInStock}}</td>
         <td>{{car.description}}</td>
-    </tr>
+     </tr>
+    
+    
 </table>
