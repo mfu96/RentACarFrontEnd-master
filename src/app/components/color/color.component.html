@@ -16,15 +16,25 @@
   </tr>
 </table> -->
 
+<div class="mb-1">
+  <label for="filterText" class="form-label">Rengi Aramak İçin Buraya Yazın</label>
+  <input type="text" [(ngModel)]="filterText"  class="form-control" id="filterText" placeholder="KIRMIZI">
+                      <!-- ngModel için FormsModel'i import etmeyi unutma -->
+</div>
+<div *ngIf="filterText.length>2" class="alert alert-success">  
+                                  <!-- bu alert'ler ile ilgili 19. gün 44. dakika veya get/bootstrap -->
+{{filterText}} aradınız
+</div>
+
 <ul class="list-group">
   <li [class]="getAllColorClass()" routerLink="/cars" >Tüm Renkler</li>
   <li
     (click)="setCurrentColor(color)"
     routerLink="/cars/color/{{ color.colorId }}"
-    *ngFor="let color of colors"
+    *ngFor="let color of colors |filterColor:filterText"
     [class]="getCurrentColorClass(color)"
   >
-    {{ color.colorName }}
+    {{ color.colorName |uppercase}}
   </li>
 </ul>
 

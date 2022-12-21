@@ -10,6 +10,7 @@ import { CategoryService } from 'src/app/services/category.service';
 export class CategoryComponent implements OnInit {
   categories:Category[]=[];
   currentCategory:Category;
+  filterText="";
 
   constructor(private categoryService: CategoryService) { }
 

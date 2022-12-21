@@ -1,12 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { filter } from 'rxjs';
+import { Color } from '../models/entities/color';
 
 @Pipe({
   name: 'filterColor'
 })
 export class FilterColorPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: Color[], filterText:string): Color[] {
+    filterText=filterText?filterText.toLocaleLowerCase():""
+    return filterText?value.filter((cl:Color)=>cl.colorName.toLocaleLowerCase()
+    .indexOf(filterText)!==-1):value
   }
 
 }

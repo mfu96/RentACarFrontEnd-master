@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FilterRentalPipe } from './pipes/filter-rental.pipe';
 import { FilterBrandPipe } from './pipes/filter-brand.pipe';
 import { FilterColorPipe } from './pipes/filter-color.pipe';
+import { FilterCategoryPipe } from './pipes/filter-category.pipe';
 
 
 
@@ -40,7 +41,8 @@ import { FilterColorPipe } from './pipes/filter-color.pipe';
     RentalDetailComponent,
     FilterRentalPipe,
     FilterBrandPipe,
-    FilterColorPipe
+    FilterColorPipe,
+    FilterCategoryPipe
     
     
   ],

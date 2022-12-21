@@ -1,9 +1,19 @@
+<div class="mb-1">
+  <label for="filterText" class="form-label">Kategoriyi Aramak İçin Buraya Yazın</label>
+  <input type="text" [(ngModel)]="filterText"  class="form-control" id="filterText" placeholder="Lüks">
+                      <!-- ngModel için FormsModel'i import etmeyi unutma -->
+</div>
+<div *ngIf="filterText.length>2" class="alert alert-success">  
+                                  <!-- bu alert'ler ile ilgili 19. gün 44. dakika veya get/bootstrap -->
+{{filterText}} aradınız
+</div>
+
 <ul class="list-group">
   <li [class]="getAllCategoryClass()" routerLink="/cars">Tüm Kategoriler</li>
   <li
     (click)="setCurrentCategory(category)"
     routerLink="/cars/category/{{ category.categoryId }}"
-    *ngFor="let category of categories"
+    *ngFor="let category of categories |filterCategory:filterText"
     [class]="getCurrentCategoryClass(category)"
   >
     {{ category.categoryName }}
