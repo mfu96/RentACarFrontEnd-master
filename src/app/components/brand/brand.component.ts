@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Brand } from 'src/app/models/entities/brand';
 import { BrandService } from 'src/app/services/brand.service';
+import { FormControl, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-brand',
@@ -9,9 +11,17 @@ import { BrandService } from 'src/app/services/brand.service';
 })
 export class BrandComponent implements OnInit {
   brands: Brand[] = [];
-  currentBrand: Brand;
+  currentBrand: Brand ;
   dataLoaded = false;
+  
   filterText="";
+  selectedBrand:string=null;
+
+  brandForm = new FormGroup({
+    brand: new FormControl(this.brands),
+  });
+  
+
 
   //private yazmamızın sebebi dışardaki classlar'dan ulaşılmasını engellemek
   constructor(private brandService: BrandService) {}
@@ -45,6 +55,7 @@ export class BrandComponent implements OnInit {
     }
     else {
       return 'list-group-item';
+    }
   }
-}
+
 }

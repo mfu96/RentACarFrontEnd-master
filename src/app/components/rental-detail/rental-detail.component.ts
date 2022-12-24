@@ -12,6 +12,7 @@ rentalDetails:RentalDetailDto[]=[];
 dataLoaded=false;
 filterText="";
 
+
   constructor(private rentalService:RentalService) { }
 
   ngOnInit(): void {

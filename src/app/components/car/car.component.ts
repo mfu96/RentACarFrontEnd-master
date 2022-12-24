@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Brand } from 'src/app/models/entities/brand';
 import { Car } from 'src/app/models/entities/car';
@@ -20,6 +21,10 @@ export class CarComponent implements OnInit {
   carByDetail:CarDetailDto[]=[];
   currentCar:Car;
   dataLoaded = false;
+
+  carForm= new FormGroup({
+    car: new FormControl(this.cars),
+  });
 
   constructor(
     private carService: CarService,

@@ -1,8 +1,8 @@
-<!-- <div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
+<div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
 
-<table *ngIf="dataLoaded == true" class="table">
+<!-- <table *ngIf="dataLoaded == true" class="table">
   <thead>
     <tr>
       <th>No</th>
@@ -14,29 +14,49 @@
     <td>{{ brand.brandName }}</td>
   </tr>
 </table> -->
-<div class="mb-1">
+
+<form [formGroup]="brandForm">
+
+  <div class="row">
+    <div class="col-md-12">
+      <select formControlName="brand" class="form-select" id="brands" aria-label="Default select example">
+        <option selected>Marka Seçiniz</option>
+
+        <option *ngFor="let brand of brands" [value]="brand.brandId" [class]="getCurrentBrandClass(brand)"
+          onchange="setCurrentBrand(brand)">{{brand.brandName}}
+        </option>
+      </select>
+
+      <button type="submit" class="btn btn-success mt-2" routerLink="/cars/brand/{{brandForm.value.brand}}">
+        Gönder
+      </button>
+
+    </div>
+  </div>
+</form>
+
+
+
+
+
+<div class="mb-3">
   <label for="filterText" class="form-label">Markayı Aramak İçin Buraya Yazın</label>
-  <input type="text" [(ngModel)]="filterText"  class="form-control" id="filterText" placeholder="TOGG">
-                      <!-- ngModel için FormsModel'i import etmeyi unutma -->
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="TOGG">
+  <!-- ngModel için FormsModel'i import etmeyi unutma  -->
 </div>
-<div *ngIf="filterText.length>2" class="alert alert-success">  
-                                  <!-- bu alert'ler ile ilgili 19. gün 44. dakika veya get/bootstrap -->
-{{filterText}} aradınız
+<div *ngIf="filterText.length>2" class="alert alert-success">
+  <!-- bu alert'ler ile ilgili 19. gün 44. dakika veya get/bootstrap  -->
+  {{filterText}} aradınız
 </div>
 
-<ul class="list-group">
-  <li [class]="getAllBrandClass()" routerLink="/cars">Tüm Markalar</li>
-<li (click)="setCurrentBrand(brand)"
-routerLink="/cars/brand/{{brand.brandId}}"
-*ngFor="let brand of brands | filterBrand:filterText"
-[class]="getCurrentBrandClass(brand)">
 
-{{brand.brandName }}
+
+
+
+<li [class]="getAllBrandClass()" routerLink="/cars">Tüm Markalar</li>
+<li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.brandId}}"
+  *ngFor="let brand of brands | filterBrand:filterText" [class]="getCurrentBrandClass(brand)">
+
+  {{brand.brandName }}
 
 </li>
-<h4 *ngIf="currentBrand">
-  {{currentBrand.brandName}}
-</h4>
-<br>
-</ul>
-

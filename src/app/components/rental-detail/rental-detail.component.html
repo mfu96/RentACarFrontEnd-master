@@ -2,38 +2,53 @@
     <span class="visually-hidden">Loading...</span>
 </div>
 
-<div class="mb-3">
-    <label for="filterText" class="form-label">Ürünü Aramak İçin Buraya Yazın</label>
-    <input type="text" [(ngModel)]="filterText"  class="form-control" id="filterText" placeholder="Opel">
-                        <!-- ngModel için FormsModel'i import etmeyi unutma -->
-  </div>
-  <div *ngIf="filterText.length>2" class="alert alert-success">  
-                                    <!-- bu alert'ler ile ilgili 19. gün 44. dakika veya get/bootstrap -->
-  {{filterText}} aradınız
-  </div>
 
-<table *ngIf="dataLoaded==true" class="table">
-    <thead>
-        <tr>
-            <th>Kiralama No</th>
-            <th>Araba İsmi</th>
-            <th>Şirket İsmi</th>
-            <th>Kiralama Tarihi</th>
-            <th>Geri Dönüş Tarihi</th>
-            <th>Günlük Ücreti</th>
-            
-        </tr>
-    </thead>
-    
-    <tbody>
-        <tr *ngFor="let detail of rentalDetails |filterRental:filterText ">
-        <td>{{detail.rentId}}</td>
-        <td>{{detail.carName | uppercase}}</td>
-        <td>{{detail.companyName | uppercase}}</td>
-        <td>{{detail.rentDate}}</td>
-        <td>{{detail.returnDate}}</td>
-        <td>{{detail.unitPrice}}</td>
-    </tr>
-    </tbody>
-    
-</table>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <app-category></app-category>
+            <app-brand></app-brand>
+            <app-color></app-color>
+        </div>
+
+        <div class="col-md-9">
+
+            <div class="mb-3">
+                <label for="filterText" class="form-label">Ürünü Aramak İçin Buraya Yazın</label>
+                <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="42AA101">
+                <!-- ngModel için FormsModel'i import etmeyi unutma -->
+            </div>
+            <div *ngIf="filterText.length>2" class="alert alert-success">
+                <!-- bu alert'ler ile ilgili 19. gün 44. dakika veya get/bootstrap -->
+                {{filterText}} aradınız
+            </div>
+
+            <table *ngIf="dataLoaded==true" class="table">
+                <thead>
+                    <tr>
+                        <th>Kiralama No</th>
+                        <th>Araba İsmi</th>
+                        <th>Şirket İsmi</th>
+                        <th>Kiralama Tarihi</th>
+                        <th>Geri Dönüş Tarihi</th>
+                        <th>Günlük Ücreti</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let detail of rentalDetails |filterRental:filterText ">
+                        <td>{{detail.rentId}}</td>
+                        <td>{{detail.carName | uppercase}}</td>
+                        <td>{{detail.companyName | uppercase}}</td>
+                        <td>{{detail.rentDate}}</td>
+                        <td>{{detail.returnDate}}</td>
+                        <td>{{detail.unitPrice}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
