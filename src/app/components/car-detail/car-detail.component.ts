@@ -21,8 +21,8 @@ export class CarDetailComponent implements OnInit {
   constructor(
     private carService: CarService,
     private carImageService:CarImageService,
-    private activatedRoute: ActivatedRoute,
-   // private domSanitizer: DomSanitizer
+    private activatedRoute: ActivatedRoute
+   
   ) {}
 
   ngOnInit(): void {

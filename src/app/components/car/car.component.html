@@ -19,15 +19,18 @@
 </div>
 
 
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
+            
             <app-category></app-category>
             <app-brand></app-brand>
             <app-color></app-color>
         </div>
 
         <div class="col-md-9">
+            <app-car-filter></app-car-filter>
             <table *ngIf="dataLoaded==true" class="table">
                 <thead>
                     <tr>

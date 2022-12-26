@@ -20,6 +20,7 @@ import { FilterRentalPipe } from './pipes/filter-rental.pipe';
 import { FilterBrandPipe } from './pipes/filter-brand.pipe';
 import { FilterColorPipe } from './pipes/filter-color.pipe';
 import { FilterCategoryPipe } from './pipes/filter-category.pipe';
+import { CarFilterComponent } from './components/car-filter/car-filter.component';
 
 
 
@@ -42,7 +43,8 @@ import { FilterCategoryPipe } from './pipes/filter-category.pipe';
     FilterRentalPipe,
     FilterBrandPipe,
     FilterColorPipe,
-    FilterCategoryPipe
+    FilterCategoryPipe,
+    CarFilterComponent
     
     
   ],
