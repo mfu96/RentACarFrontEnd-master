@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Category } from 'src/app/models/entities/category';
 import { CategoryService } from 'src/app/services/category.service';
 
@@ -12,7 +13,8 @@ export class CategoryComponent implements OnInit {
   currentCategory:Category;
   filterText="";
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService,
+    private toastrService:ToastrService) { }
 
   ngOnInit(): void {
     this.getCategories();
@@ -22,6 +24,7 @@ export class CategoryComponent implements OnInit {
   
   setCurrentCategory(category:Category){
     this.currentCategory=category
+    this.toastrService.info(category.categoryName +" kategorisi listeleniyor")
   }
 
   getCurrentCategoryClass(category:Category){

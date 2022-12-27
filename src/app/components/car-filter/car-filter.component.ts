@@ -29,6 +29,7 @@ export class CarFilterComponent implements OnInit {
 
     this.getBrands();
     this.getColors();
+    
   }
 
   checkFilterClass(){
@@ -45,6 +46,7 @@ export class CarFilterComponent implements OnInit {
     if(this.selectedBrand!=null&&this.selectedColor!=null)
     {
       return "/cars/brand/"+this.selectedBrand+"/cars/color/"+this.selectedColor
+      
     }
     else if(this.selectedBrand!=null&& this.selectedColor==null)
     {
@@ -56,20 +58,27 @@ export class CarFilterComponent implements OnInit {
     }
     else
     {
-      return "cars/getdetails"
+      return "/cars/getdetails"
     }
+   
+    
   }
 
   getBrands(){
     this.brandService.getBrands().subscribe(response =>{
+     //this.toastrService.success("Marka listelendi");
       this.brands=response.data
-      this.toastrService.success("Marka listelendi")
+      
     })
   }
 
   getColors(){
     this.colorService.getColors().subscribe(response =>{
+     // this.toastrService.success("Marka listelendi");
       this.colors=response.data
+      //this.toastrService.success("111")
     })
   }
+  
+
 }

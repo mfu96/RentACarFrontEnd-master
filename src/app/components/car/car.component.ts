@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/entities/brand';
 import { Car } from 'src/app/models/entities/car';
 import { CarDetailDto } from 'src/app/models/entities/carDetailDto';
@@ -29,6 +30,7 @@ export class CarComponent implements OnInit {
   constructor(
     private carService: CarService,
     private activatedRoute: ActivatedRoute,
+    private toastrService:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +50,8 @@ export class CarComponent implements OnInit {
       
       else {
         this.getCars()
-      }
+      this.toastrService.info("Tüm araçlar listlendi")
+    }
     });
   }
 
@@ -92,9 +95,11 @@ export class CarComponent implements OnInit {
   // }
   setCurrentCar(car: Car) {
     this.currentCar = car;
+    this.toastrService.info(car.carName +" plakalı araç listeleniyor")
   }
 
   getCurrentCarClass(car: Car) {
+    
     if (car == this.currentCar) {
       return 'list-group-item active';
     } else {
@@ -102,6 +107,7 @@ export class CarComponent implements OnInit {
     }
   }
   getAllCarClass(){
+    
     if(!this.currentCar){
       return'list-group-item active';
     }
