@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/entities/brand';
 import { Color } from 'src/app/models/entities/color';
 import { BrandService } from 'src/app/services/brand.service';
@@ -20,7 +21,9 @@ export class CarFilterComponent implements OnInit {
   selectedColor:string=null;
   routeLink="";
 
-  constructor(private brandService:BrandService,private colorService:ColorService) { }
+  constructor(private brandService:BrandService,
+    private colorService:ColorService,
+    private toastrService:ToastrService) { }
 
   ngOnInit(): void {
 
@@ -60,6 +63,7 @@ export class CarFilterComponent implements OnInit {
   getBrands(){
     this.brandService.getBrands().subscribe(response =>{
       this.brands=response.data
+      this.toastrService.success("Marka listelendi")
     })
   }
 
