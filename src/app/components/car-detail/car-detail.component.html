@@ -1,18 +1,10 @@
-
 <div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-
-
-
-<div class="from-group">
-  <div class="row">
-    <div *ngFor="let carImage of carImages  "class="col-md-9">
-      <img src ="https://localhost:44389/{{carImage.imagePath}}" class="d-block w-100" width="800"  height="400" alt="..." >
-    </div>
-  </div>
- 
+  <span class="visually-hidden">Loading...</span>
 </div>
+
+
+
+
 
 <!-- alternatif -->
 
@@ -147,29 +139,53 @@
   </div>
 </div> -->
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <app-category></app-category>
+      <app-brand></app-brand>
+      <app-color></app-color>
+    </div>
+    <div class="col-md-9">
+      <div class="from-group">
+        <div class="row">
+          <div *ngFor="let carImage of carImages  " class="col-md-9">
+            <img src="https://localhost:44389/{{carImage.imagePath}}" class="d-block w-100" width="800" height="400"
+              alt="...">
+          </div>
+        </div>
+      
+      </div>
+      <table *ngIf="dataLoaded==true" class="table">
 
-
-
-<table *ngIf="dataLoaded==true" class="table">
-     
-    <thead>
-        <tr>
+        <thead>
+          <tr>
             <th>Araba No</th>
             <th>Araba İsmi</th>
             <th>Kategori</th>
             <th>Marka</th>
             <th>Renk</th>
             <th>Stok Adedi</th>
+            <th>Günlük Ücreti</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tr *ngFor="let detail of carDetails">
+          <td>{{detail.carId}}</td>
+          <td (click)="setCurrentDetail(detail)" routerLink="/cars/detail/{{detail.carId}}"
+            [class]="getCurrentDetailClass(detail)">{{detail.carName}}</td>
+          <td>{{detail.categoryName}}</td>
+          <td>{{detail.brandName}}</td>
+          <td>{{detail.colorName}}</td>
+          <td>{{detail.unitsInStock}}</td>
+          <td>{{detail.unitPrice}}</td>
+          <td> </td>
         </tr>
-    </thead>
-    <tr *ngFor="let detail of carDetails">
-        <td>{{detail.carId}}</td>
-        <td>{{detail.carName}}</td>
-        <td>{{detail.categoryName}}</td>
-        <td>{{detail.brandName}}</td>
-        <td>{{detail.colorName}}</td>
-        <td>{{detail.unitsInStock}}</td>
-    </tr>
 
-    
-</table>
+
+      </table>
+      
+    </div>
+  </div>
+
+</div>

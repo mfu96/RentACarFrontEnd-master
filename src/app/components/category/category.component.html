@@ -9,7 +9,7 @@
 </div>
 
 <ul class="list-group">
-  <li [class]="getAllCategoryClass()" routerLink="/cars">Tüm Kategoriler</li>
+  <li [class]="getAllCategoryClass()" routerLink="/cars/getdetails">Tüm Kategoriler</li>
   <li
     (click)="setCurrentCategory(category)"
     routerLink="/cars/category/{{ category.categoryId }}"

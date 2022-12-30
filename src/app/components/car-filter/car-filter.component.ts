@@ -27,7 +27,7 @@ export class CarFilterComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getBrands();
+     this.getBrands();
     this.getColors();
     
   }
@@ -66,7 +66,6 @@ export class CarFilterComponent implements OnInit {
 
   getBrands(){
     this.brandService.getBrands().subscribe(response =>{
-     //this.toastrService.success("Marka listelendi");
       this.brands=response.data
       
     })
@@ -74,9 +73,7 @@ export class CarFilterComponent implements OnInit {
 
   getColors(){
     this.colorService.getColors().subscribe(response =>{
-     // this.toastrService.success("Marka listelendi");
       this.colors=response.data
-      //this.toastrService.success("111")
     })
   }
   

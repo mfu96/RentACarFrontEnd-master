@@ -1,7 +1,7 @@
-<!-- <div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
+ <div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
-
+<!--
 <table *ngIf="dataLoaded == true" class="table">
   <thead>
     <tr>
@@ -29,7 +29,7 @@
 </div>
 
 <ul class="list-group">
-  <li [class]="getAllColorClass()" routerLink="/cars" >Tüm Renkler</li>
+  <li [class]="getAllColorClass()" routerLink="/cars/getdetails" >Tüm Renkler</li>
   <li
     (click)="setCurrentColor(color)"
     routerLink="/cars/color/{{ color.colorId }}"

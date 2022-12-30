@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/entities/car';
 import { CarDetailDto } from 'src/app/models/entities/carDetailDto';
 import { CarImage } from 'src/app/models/entities/carImage';
@@ -16,12 +17,14 @@ export class CarDetailComponent implements OnInit {
   carDetails: CarDetailDto[] = [];
   cars: Car[] = [];
   carImages: CarImage[]=[];
+  currentDetail:CarDetailDto;
   dataLoaded = false;
 
   constructor(
     private carService: CarService,
     private carImageService:CarImageService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastrService:ToastrService
    
   ) {}
 
@@ -38,6 +41,7 @@ export class CarDetailComponent implements OnInit {
       }
        else {
         this.getCarDetails();
+        this.toastrService.info("Tüm araçların detayları listelendi")
       }
     });
 
@@ -91,6 +95,21 @@ getImageSource(carImage:CarImage):string{
       return "carousel-item active";
     } else {
       return "carousel-item";
+    }
+  }
+  setCurrentDetail(detail:CarDetailDto){
+this.currentDetail=detail;
+this.toastrService.info(detail.carName+ " plakalı ve "+ detail.brandName + " marka araç listeleniyor")
+  }
+
+  getCurrentDetailClass(detail:CarDetailDto){
+    if(detail==this.currentDetail)
+    {
+      return 'list-group-item active';
+    }
+    else
+    {
+      return 'list-group-item'
     }
   }
 }
