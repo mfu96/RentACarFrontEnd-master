@@ -5,10 +5,13 @@ import { CarImageComponent } from './components/car-image/car-image.component';
 import { CarComponent } from './components/car/car.component';
 import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
 import { RentalDetailComponent } from './components/rental-detail/rental-detail.component';
+import { RentalComponent } from './components/rental/rental.component';
 
 const routes: Routes = [
   { path:"", pathMatch:"full", component:RentalDetailComponent},
   {path:"rentals/getdetails",component:RentalDetailComponent},
+  {path:"rental",component:RentalComponent},
+
   {path: "cars/getdetails", component:CarDetailComponent },
   {path: "customers/getdetails", component:CustomerDetailComponent},
   {path: "cars/category/:categoryId", component:CarComponent},

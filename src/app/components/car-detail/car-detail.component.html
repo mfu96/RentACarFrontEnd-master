@@ -170,7 +170,8 @@
             <th></th>
           </tr>
         </thead>
-        <tr *ngFor="let detail of carDetails">
+        <tbody>
+          <tr *ngFor="let detail of carDetails">
           <td>{{detail.carId}}</td>
           <td (click)="setCurrentDetail(detail)" routerLink="/cars/detail/{{detail.carId}}"
             [class]="getCurrentDetailClass(detail)">{{detail.carName}}</td>
@@ -179,12 +180,20 @@
           <td>{{detail.colorName}}</td>
           <td>{{detail.unitsInStock}}</td>
           <td>{{detail.unitPrice}}</td>
-          <td> </td>
+          <td><button type="button" class="btn btn-success" routerLink="/rental">Kirala</button> </td>
+          
+          
         </tr>
+       
+        </tbody>
+        
 
 
       </table>
-      
+       <div>
+          <app-rental></app-rental>
+
+        </div>
     </div>
   </div>
 
