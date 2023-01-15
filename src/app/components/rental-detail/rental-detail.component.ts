@@ -25,4 +25,7 @@ filterText="";
   .subscribe(response=>{this.rentalDetails=response.data;
   this.dataLoaded=true;})}
 
+
+
+
 }

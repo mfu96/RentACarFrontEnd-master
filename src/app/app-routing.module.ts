@@ -4,6 +4,7 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 import { CarImageComponent } from './components/car-image/car-image.component';
 import { CarComponent } from './components/car/car.component';
 import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
+import { CustomerComponent } from './components/customer/customer.component';
 import { RentalDetailComponent } from './components/rental-detail/rental-detail.component';
 import { RentalComponent } from './components/rental/rental.component';
 
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path:"", pathMatch:"full", component:RentalDetailComponent},
   {path:"rentals/getdetails",component:RentalDetailComponent},
   {path:"rental",component:RentalComponent},
+
 
   {path: "cars/getdetails", component:CarDetailComponent },
   {path: "customers/getdetails", component:CustomerDetailComponent},

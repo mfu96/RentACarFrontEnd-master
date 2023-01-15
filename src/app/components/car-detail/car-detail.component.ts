@@ -19,7 +19,7 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class CarDetailComponent implements OnInit {
   carDetails: CarDetailDto[] = [];
-  cars: Car[] = [];
+  car: Car;
   carImages: CarImage[] = [];
   currentDetail: CarDetailDto;
   dataLoaded = false;
@@ -92,7 +92,7 @@ export class CarDetailComponent implements OnInit {
     this.carImageService.getImageByCarId(carid).subscribe(response => {
       this.carImages = response.data;
       this.dataLoaded = true;
-      console.log("Çalıştı mı?")
+      console.log("CAR-DETAIL Çalıştı mı?")
     })
   }
 

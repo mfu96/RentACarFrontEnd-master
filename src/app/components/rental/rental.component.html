@@ -1,3 +1,4 @@
+
 <form [formGroup]="addRentCarForm" (ngSubmit)="checkCarRentable()">
     <div class="row">
        <div class="col-lg-6">
@@ -16,7 +17,6 @@
           </div>
        </div>
     </div>
-    <ul>hoop</ul>
  
     <div class="text-end">
        <button *ngIf="carId" class="btn btn-sm btn-primary" [disabled]="addRentCarForm.invalid">

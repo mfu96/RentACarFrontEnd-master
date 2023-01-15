@@ -1,22 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup,Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Car } from 'src/app/models/entities/car';
+import { Customer } from 'src/app/models/entities/customer';
 import { Rental } from 'src/app/models/entities/rental';
+import { CustomerService } from 'src/app/services/customer.service';
 import { LocalStorageService } from 'src/app/services/local-storge.service';
 import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-rental',
   templateUrl: './rental.component.html',
-  styleUrls: ['./rental.component.css']
+  styleUrls: ['./rental.component.css'],
 })
 export class RentalComponent implements OnInit {
+  rental:Rental;
+  carId:number;
 
-   rental: Rental;
   addRentCarForm: FormGroup;
-  carId: number
   currentDate: Date = new Date();
+
+
+
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -24,17 +31,20 @@ export class RentalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private localStorageService: LocalStorageService,
     private rentalService: RentalService,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.carId = parseInt(this.activatedRoute.snapshot.paramMap.get('carId'));
     this.createAddRentCarForm();
+    
+
   }
 
   createAddRentCarForm() {
     this.addRentCarForm = this.formBuilder.group({
       carId: [this.carId, Validators.required],
-      customerId: [this.localStorageService.getCurrentCustomer().customerId, Validators.required],
+      customerId: [this.localStorageService.getCurrentCustomer().customerId==1, Validators.required],
       rentDate: ['', [Validators.required]],
       returnDate: ['', Validators.required]
 
@@ -93,9 +103,46 @@ export class RentalComponent implements OnInit {
 
       return true;
 
-
     })
   }
 
 
+ // isLogOK(){
+    //  return true
+    // }
+  
+  
+  
+    // getCustomer() {
+    //   this.customerService.getCustomer().subscribe((response) => {
+    //     this.customers = response.data;
+    //     console.log("customer çalıştı mı?")
+    //   });
+    // }
+  
+    // //Bu günün tarihini veriyor  YYYY-AA-GG
+    // getDate(day: number) {
+    //   var today = new Date();
+    //   today.setDate(today.getDate() + day);
+    //   console.log(today.toISOString().slice(0, 10));
+    //   return today.toISOString().slice(0, 10);
+    // }
+  
+    // create() {
+    //   let rental: Rental = 
+    //   {
+    //     carId: this.car.carId,
+    //     customerId: parseInt(this.customerId.toString()),
+    //     rentDate:this.rentDate,
+    //     returnDate:this.returnDate
+    //   };
+    //   this.rentalService.addRental(rental).subscribe(response=>{
+    //     this.toastrService.success("Kiralama Başarılı");
+        
+    //   },error=>{
+    //     console.info(error)
+    //     this.toastrService.warning("Kiaralama başarısız")
+    //   })
+  
+    // }
 }
