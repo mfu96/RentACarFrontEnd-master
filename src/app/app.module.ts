@@ -24,6 +24,7 @@ import { FilterCategoryPipe } from './pipes/filter-category.pipe';
 import { CarFilterComponent } from './components/car-filter/car-filter.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { LoginComponent } from './components/auth/login/login.component';
 
 
 
@@ -47,7 +48,8 @@ import { ToastrModule } from 'ngx-toastr';
     FilterBrandPipe,
     FilterColorPipe,
     FilterCategoryPipe,
-    CarFilterComponent
+    CarFilterComponent,
+    LoginComponent
     
     
   ],
