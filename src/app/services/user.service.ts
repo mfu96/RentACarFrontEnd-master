@@ -20,8 +20,8 @@ export class UserService {
     return this.httpClient.get<ListResponseModel<User>>(newPath);
   }
 
-  getUserDetails():Observable<ListResponseModel<User>>{
-    let newPath=this.apiUrl + "users/getbyemail";
+  getUserDetails(email:string):Observable<ListResponseModel<User>>{
+    let newPath=this.apiUrl + "users/getbyemail?email="+ email;
     return this.httpClient.get<ListResponseModel<User>>(newPath);
   }
 }

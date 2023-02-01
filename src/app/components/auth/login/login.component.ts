@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, UrlSegmentGroup } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Customer } from 'src/app/models/entities/customer';
 import { LoginModel } from 'src/app/models/entities/loginModel';
+import { User } from 'src/app/models/entities/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storge.service';
 import { UserService } from 'src/app/services/user.service';
@@ -16,7 +16,7 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginComponent implements OnInit {
 
   loginForm:FormGroup;
-  customer:Customer;
+  user:User;
   currentCustomerEmail:string="";
 
   constructor(private formBuilder:FormBuilder,
@@ -46,9 +46,18 @@ export class LoginComponent implements OnInit {
     this.authService.login(loginModel).subscribe(responeSuccess=>{
       this.toastrService.success(responeSuccess.message, "Başarılı");
       this.localStorgeService.setToken(responeSuccess.data);
-      //this.localStorgeService.set("email", this.loginForm.get())
+      //this.localStorgeService.set("email", this.loginForm.get("email")?.value)
+      this.getUserByEmail(loginModel.email)
     })
   }
+
+
+  getUserByEmail(email: string) {
+    this.userService.getUserDetails(email).subscribe(responseSuccess => {
+    // = responseSuccess.data;
+      // this.localStorageService.setCurrentCustomer(this.user);
+    });
+ }
 
 
 }
