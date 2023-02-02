@@ -1,4 +1,6 @@
-<section class="vh-100" style="background-color: #508bfc;">
+<form [formGroup]="loginForm">
+
+  <section class="vh-100" style="background-color: #508bfc;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -23,7 +25,7 @@
                 <label class="form-check-label" for="form1Example3"> Parolamı unuttum </label>
               </div>
   
-              <button class="btn btn-primary btn-lg btn-block" (click)="login">Giriş</button>
+              <button class="btn btn-primary btn-lg btn-block" (click)="login()">Giriş</button>
   
   
             
@@ -33,3 +35,4 @@
       </div>
     </div>
   </section>
+</form>

@@ -11,58 +11,55 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
   user: User;
-  currentCustomerEmail: string = "";
+  currentCustomerEmail: string = '';
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
     private router: Router,
     private localStorgeService: LocalStorageService,
-    private userService: UserService) { }
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-
     this.ceratedLoginForm();
   }
 
   ceratedLoginForm() {
     this.loginForm = this.formBuilder.group({
-      email: [this.currentCustomerEmail, [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
+  //  this.toastrService.warning("Bilgiler bi olamamış sanki!")
 
   login() {
-    if (this.loginForm.invalid) {
-      this.toastrService.warning("Bilgiler bi olamamış sanki!")
+    if (this.loginForm.valid) {
+      let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
+
+      this.authService.login(loginModel).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Başarılı');
+          this.localStorgeService.set('token', response.data.token);
+          this.localStorgeService.set(
+            'email',
+            this.loginForm.get('email')?.value
+          );
+
+          setTimeout(() => {
+            this.router.navigate(['/cars']);
+          }, 1000);
+        },
+        (responseError) => {
+          this.toastrService.error(responseError.error, 'Hata oluştu!');
+        }
+      );
     }
-
-    let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
-
-    this.authService.login(loginModel).subscribe(responeSuccess => {
-      this.toastrService.success(responeSuccess.message, "Başarılı");
-      this.localStorgeService.setToken(responeSuccess.data);
-      this.localStorgeService.set("email", this.loginForm.get("email")?.value)
-
-      return setTimeout(() => { this.router.navigate(['/cars']) }, 1000);
-
-    },
-      responseError => {
-        return this.toastrService.error(
-          responseError.error, "Hata oluştu!");
-      }
-
-    )
   }
-
-
-
-
-
 }
