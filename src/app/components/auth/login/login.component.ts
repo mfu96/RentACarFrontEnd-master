@@ -15,49 +15,54 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm:FormGroup;
-  user:User;
-  currentCustomerEmail:string="";
+  loginForm: FormGroup;
+  user: User;
+  currentCustomerEmail: string = "";
 
-  constructor(private formBuilder:FormBuilder,
-    private authService:AuthService,
-    private toastrService:ToastrService,
-    private router:Router,
-    private localStorgeService:LocalStorageService,
-    private userService:UserService) { }
+  constructor(private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private toastrService: ToastrService,
+    private router: Router,
+    private localStorgeService: LocalStorageService,
+    private userService: UserService) { }
 
   ngOnInit(): void {
+
+    this.ceratedLoginForm();
   }
 
-  ceratedLoginForm(){
-    this.loginForm=this.formBuilder.group({
-      email:[this.currentCustomerEmail, [Validators.required, Validators.email]],
-      password:['',Validators.required]
+  ceratedLoginForm() {
+    this.loginForm = this.formBuilder.group({
+      email: [this.currentCustomerEmail, [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     });
   }
 
-  login(){
-    if (this.loginForm.invalid){
+  login() {
+    if (this.loginForm.invalid) {
       this.toastrService.warning("Bilgiler bi olamamış sanki!")
     }
 
-    let loginModel:LoginModel=Object.assign({}, this.loginForm.value);
+    let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
 
-    this.authService.login(loginModel).subscribe(responeSuccess=>{
+    this.authService.login(loginModel).subscribe(responeSuccess => {
       this.toastrService.success(responeSuccess.message, "Başarılı");
       this.localStorgeService.setToken(responeSuccess.data);
-      //this.localStorgeService.set("email", this.loginForm.get("email")?.value)
-      this.getUserByEmail(loginModel.email)
-    })
+      this.localStorgeService.set("email", this.loginForm.get("email")?.value)
+
+      return setTimeout(() => { this.router.navigate(['/cars']) }, 1000);
+
+    },
+      responseError => {
+        return this.toastrService.error(
+          responseError.error, "Hata oluştu!");
+      }
+
+    )
   }
 
 
-  getUserByEmail(email: string) {
-    this.userService.getUserDetails(email).subscribe(responseSuccess => {
-    // = responseSuccess.data;
-      // this.localStorageService.setCurrentCustomer(this.user);
-    });
- }
+
 
 
 }
