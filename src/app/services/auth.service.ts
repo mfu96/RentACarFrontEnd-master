@@ -18,16 +18,20 @@ export class AuthService {
     private localStorageService: LocalStorageService
   ) {}
 
-  login(loginModel: LoginModel): Observable<SingleResponseModel<TokenModel>> {
-    let newPath = this.apiUrl + 'auth/login';
-    return this.httpClient.post<SingleResponseModel<TokenModel>>(
-      newPath,
-      loginModel
-    );
+  // login(loginModel: LoginModel): Observable<SingleResponseModel<TokenModel>> {
+  //   let newPath = this.apiUrl + 'auth/login';
+  //   return this.httpClient.post<SingleResponseModel<TokenModel>>(
+  //     newPath,
+  //     loginModel
+  //   ); 
 
-   
+  // }
 
+  login(loginModel:LoginModel){
+    return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + "login",loginModel)
   }
+
+
 
   register(
     registerModel: RegisterModel

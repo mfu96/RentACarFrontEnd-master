@@ -44,7 +44,7 @@ export class RentalComponent implements OnInit {
   createAddRentCarForm() {
     this.addRentCarForm = this.formBuilder.group({
       carId: [this.carId, Validators.required],
-      customerId: [this.localStorageService.getCurrentCustomer().customerId==1, Validators.required], //burayda yanlışlık olablir
+      customerId: [this.localStorageService.getCurrentUser().userId==1, Validators.required], //burayda yanlışlık olablir
       rentDate: ['', [Validators.required]],
       returnDate: ['', Validators.required]
 

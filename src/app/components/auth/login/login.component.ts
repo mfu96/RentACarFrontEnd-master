@@ -33,33 +33,41 @@ export class LoginComponent implements OnInit {
 
   ceratedLoginForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: [this.currentCustomerEmail, [Validators.required,Validators.email]],
       password: ['', Validators.required],
     });
   }
-  //  this.toastrService.warning("Bilgiler bi olamamış sanki!")
 
   login() {
-    if (this.loginForm.valid) {
-      let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
+    if (this.loginForm.invalid) {
+         this.toastrService.warning("Bilgiler bi olamamış sanki!");
+        return;
+    }
+
+      let loginModel:LoginModel = Object.assign({}, this.loginForm.value)
 
       this.authService.login(loginModel).subscribe(
-        (response) => {
-          this.toastrService.success(response.message, 'Başarılı');
-          this.localStorgeService.set('token', response.data.token);
-          this.localStorgeService.set(
-            'email',
-            this.loginForm.get('email')?.value
-          );
-
-          setTimeout(() => {
-            this.router.navigate(['/cars']);
-          }, 1000);
+        responseSuccess => {
+          this.toastrService.success('Başarılı');
+          this.localStorgeService.setToken( responseSuccess.data);
+          this.getUserDetails(loginModel.email);
+          
+          return this.router.navigate(['/cars/getdetails']);
+           
         },
-        (responseError) => {
-          this.toastrService.error(responseError.error, 'Hata oluştu!');
+        responseError => {
+          this.toastrService.error(responseError.error);
         }
       );
-    }
+    } 
+    
+    getUserDetails(email: string) {
+    this.userService.getUserDetails(email).subscribe(responseSuccess => {
+        this.user= responseSuccess.data;
+       this.localStorgeService.setCurrentUser(this.user);
+    });
+ }
   }
-}
+
+
+
