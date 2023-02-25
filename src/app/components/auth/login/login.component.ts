@@ -11,63 +11,55 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   loginForm: FormGroup;
   user: User;
-  currentCustomerEmail: string = '';
+  currentCustomerEmail: string = "";
 
-  constructor(
-    private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
     private router: Router,
     private localStorgeService: LocalStorageService,
-    private userService: UserService
-  ) {}
+    private userService: UserService) { }
 
   ngOnInit(): void {
+
     this.ceratedLoginForm();
   }
 
   ceratedLoginForm() {
     this.loginForm = this.formBuilder.group({
-      email: [this.currentCustomerEmail, [Validators.required,Validators.email]],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
+  //  this.toastrService.warning("Bilgiler bi olamamış sanki!")
 
   login() {
-    if (this.loginForm.invalid) {
-         this.toastrService.warning("Bilgiler bi olamamış sanki!");
-        return;
-    }
-
-      let loginModel:LoginModel = Object.assign({}, this.loginForm.value)
+    if (this.loginForm.valid) {
+      let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
 
       this.authService.login(loginModel).subscribe(
-        responseSuccess => {
-          this.toastrService.success('Başarılı');
-          this.localStorgeService.setToken( responseSuccess.data);
-          this.getUserDetails(loginModel.email);
-          
-          return this.router.navigate(['/cars/getdetails']);
-           
+        (response) => {
+          this.toastrService.success(response.message, 'Başarılı');
+          this.localStorgeService.set('token', response.data.token);
+          this.localStorgeService.set(
+            'email',
+            this.loginForm.get('email')?.value
+          );
+
+          setTimeout(() => {
+            this.router.navigate(['/cars']);
+          }, 1000);
         },
-        responseError => {
-          this.toastrService.error(responseError.error);
+        (responseError) => {
+          this.toastrService.error(responseError.error, 'Hata oluştu!');
         }
       );
-    } 
-    
-    getUserDetails(email: string) {
-    this.userService.getUserDetails(email).subscribe(responseSuccess => {
-        this.user= responseSuccess.data;
-       this.localStorgeService.setCurrentUser(this.user);
-    });
- }
+    }
   }
-
-
-
+}
