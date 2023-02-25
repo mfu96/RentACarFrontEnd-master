@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { LoginModel } from '../models/entities/loginModel';
 import { RegisterModel } from '../models/entities/registerModel';
 import { SingleResponseModel } from '../models/responses/singleResponseModel';
@@ -18,18 +18,20 @@ export class AuthService {
     private localStorageService: LocalStorageService
   ) {}
 
-  // login(loginModel: LoginModel): Observable<SingleResponseModel<TokenModel>> {
-  //   let newPath = this.apiUrl + 'auth/login';
-  //   return this.httpClient.post<SingleResponseModel<TokenModel>>(
-  //     newPath,
-  //     loginModel
-  //   ); 
+  login(loginModel: LoginModel): Observable<SingleResponseModel<TokenModel>> {
+    let newPath = this.apiUrl + 'auth/login';
+    return this.httpClient.post<SingleResponseModel<TokenModel>>(
+      newPath,
+      loginModel
+    ).pipe(tap(response=>{
+      localStorage.setItem('token', response.data.token); // token'ı local storage'a kaydet
+    })
+      )
+    ; 
 
-  // }
-
-  login(loginModel:LoginModel){
-    return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + "login",loginModel)
   }
+
+ 
 
 
 

@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private toastrService: ToastrService,
     private router: Router,
-    private localStorgeService: LocalStorageService,
+   // private localStorgeService: LocalStorageService,
     private userService: UserService) { }
 
   ngOnInit(): void {
@@ -40,26 +40,40 @@ export class LoginComponent implements OnInit {
   //  this.toastrService.warning("Bilgiler bi olamamış sanki!")
 
   login() {
-    if (this.loginForm.valid) {
-      let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
+    this.authService.login(this.loginForm.value).subscribe(
+      (response)=> {
+        localStorage.setItem('token', response.data.token);
+        this.toastrService.success("Giriş Başarılı");
+        this.router.navigate(["/cars"])
+      },
+      (error)=>{
+        this.toastrService.error(error.error);
+      }
+    )
 
-      this.authService.login(loginModel).subscribe(
-        (response) => {
-          this.toastrService.success(response.message, 'Başarılı');
-          this.localStorgeService.set('token', response.data.token);
-          this.localStorgeService.set(
-            'email',
-            this.loginForm.get('email')?.value
-          );
 
-          setTimeout(() => {
-            this.router.navigate(['/cars']);
-          }, 1000);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error, 'Hata oluştu!');
-        }
-      );
-    }
+
+
+    // if (this.loginForm.valid) {
+    //   let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
+
+    //   this.authService.login(loginModel).subscribe(
+    //     (response) => {
+    //       this.toastrService.success(response.message, 'Başarılı');
+    //       this.localStorgeService.set('token', response.data.token);
+    //       this.localStorgeService.set(
+    //         'email',
+    //         this.loginForm.get('email')?.value
+    //       );
+
+    //       setTimeout(() => {
+    //         this.router.navigate(['/cars']);
+    //       }, 1000);
+    //     },
+    //     (responseError) => {
+    //       this.toastrService.error(responseError.error, 'Hata oluştu!');
+    //     }
+    //   );
+    // }
   }
 }
