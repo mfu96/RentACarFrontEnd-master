@@ -21,7 +21,7 @@ export class UserService {
     return this.httpClient.get<ListResponseModel<User>>(newPath);
   }
 
-  getUserDetails(email:string):Observable<SingleResponseModel<User>>{
+  getByEmail(email:string):Observable<SingleResponseModel<User>>{
     let newPath=this.apiUrl + "users/getbyemail?email="+ email;
     return this.httpClient.get<SingleResponseModel<User>>(newPath);
   }

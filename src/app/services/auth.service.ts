@@ -23,15 +23,10 @@ export class AuthService {
     return this.httpClient.post<SingleResponseModel<TokenModel>>(
       newPath,
       loginModel
-    ).pipe(tap(response=>{
-      localStorage.setItem('token', response.data.token); // token'ı local storage'a kaydet
-    })
-      )
+    )
     ; 
 
   }
-
- 
 
 
 
@@ -42,7 +37,14 @@ export class AuthService {
     return this.httpClient.post<SingleResponseModel<TokenModel>>(newPath,registerModel)
   }
 
-  isAuthenticated(): boolean {
-    return !!this.localStorageService.getToken();
- }
+  isAuthenticated(){
+    return sessionStorage.getItem("token");
+  }
+
+  logOut(){
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("email");
+  }
+  
 }
