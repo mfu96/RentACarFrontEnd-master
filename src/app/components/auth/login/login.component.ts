@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private toastrService: ToastrService,
     private router: Router,
-   // private localStorgeService: LocalStorageService,
+    private localStorge: LocalStorageService,
     private userService: UserService) { }
 
   ngOnInit(): void {
@@ -58,12 +58,21 @@ export class LoginComponent implements OnInit {
       let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
 
       this.authService.login(loginModel).subscribe({
-        next: (response) => {
+        next: (response:any) => {
           console.log(response);
-          sessionStorage.setItem("token",response.data.token );
+          console.log("login compponent login methodu1")
+         // localStorage.setItem('token',response.token )
+          console.log("login compponent login methodu2")
+
+          this.localStorge.set('token',response.token );
+          console.log("login compponent login methodu3")
           this.toastrService.info(response.message);
-          this.router.navigate(['/cars/getdetails']);
+          this.router.navigate(['rentals/getdetails']);
           this.getUser(loginModel.email);
+          console.log("login compponent login methodu4")
+
+        
+
          
         },
         error: (responseError) => {
@@ -75,14 +84,19 @@ export class LoginComponent implements OnInit {
     else{
       this.toastrService.warning("HATA!");
     }
+
+    
+   
+
+
   }
 
   getUser(email:string){
     this.userService.getByEmail(email).subscribe((response=>{
       this.user=response.data;
       console.info(this.user)
-      sessionStorage.setItem("fullName", this.user.firstName + " "+ this.user.lastName);
-      sessionStorage.setItem("email",this.user.email)
+      this.localStorge.set("fullName", this.user.firstName + " "+ this.user.lastName);
+      this.localStorge.set("email",this.user.email)
 
 
 

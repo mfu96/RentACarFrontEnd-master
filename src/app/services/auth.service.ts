@@ -14,15 +14,14 @@ export class AuthService {
   apiUrl = 'https://localhost:44389/api/';
 
   constructor(
-    private httpClient: HttpClient,
-    private localStorageService: LocalStorageService
+    private httpClient: HttpClient
   ) {}
 
-  login(loginModel: LoginModel): Observable<SingleResponseModel<TokenModel>> {
+  login(user: LoginModel): Observable<SingleResponseModel<TokenModel>> {
     let newPath = this.apiUrl + 'auth/login';
     return this.httpClient.post<SingleResponseModel<TokenModel>>(
       newPath,
-      loginModel
+      user
     )
     ; 
 
