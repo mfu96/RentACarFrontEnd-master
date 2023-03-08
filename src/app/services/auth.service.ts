@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { LoginModel } from '../models/entities/loginModel';
 import { RegisterModel } from '../models/entities/registerModel';
 import { SingleResponseModel } from '../models/responses/singleResponseModel';
@@ -11,8 +12,7 @@ import { LocalStorageService } from './local-storge.service';
   providedIn: 'root',
 })
 export class AuthService {
-  apiUrl = 'https://localhost:44389/api/';
-
+  apiUrl =environment.apiUrl;
   constructor(
     private httpClient: HttpClient
   ) {}

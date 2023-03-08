@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/responses/listResponseModel';
 import { User } from '../models/entities/user';
 import { SingleResponseModel } from '../models/responses/singleResponseModel';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { SingleResponseModel } from '../models/responses/singleResponseModel';
 })
 export class UserService {
 
-  apiUrl = 'https://localhost:44389/api/';
+  apiUrl =environment.apiUrl;
 
 
   constructor(private httpClient:HttpClient) { }
