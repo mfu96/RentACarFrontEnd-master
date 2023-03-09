@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(loginModel).subscribe({
         next: (response:any) => {
+          //console.log(response.data.token);
           console.log(response);
           console.log("login compponent login methodu1")
          // localStorage.setItem('token',response.token )
@@ -66,7 +67,7 @@ export class LoginComponent implements OnInit {
 
           this.localStorge.set('token',response.token );
           console.log("login compponent login methodu3")
-          this.toastrService.info(response.message);
+          this.toastrService.info("Giriş Başarılı FE");
           this.router.navigate(['rentals/getdetails']);
           this.getUser(loginModel.email);
           console.log("login compponent login methodu4")
