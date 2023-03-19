@@ -16,7 +16,7 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { CarImageComponent } from './components/car-image/car-image.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { RentalDetailComponent } from './components/rental-detail/rental-detail.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FilterRentalPipe } from './pipes/filter-rental.pipe';
 import { FilterBrandPipe } from './pipes/filter-brand.pipe';
 import { FilterColorPipe } from './pipes/filter-color.pipe';
@@ -25,6 +25,7 @@ import { CarFilterComponent } from './components/car-filter/car-filter.component
 
 import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './components/auth/login/login.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 
@@ -65,7 +66,9 @@ import { LoginComponent } from './components/auth/login/login.component';
     }),
     
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

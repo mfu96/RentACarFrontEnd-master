@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { Router, UrlSegmentGroup } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoginModel } from 'src/app/models/entities/loginModel';
@@ -33,13 +33,15 @@ export class LoginComponent implements OnInit {
 
   ceratedLoginForm() {
     this.loginForm = this.formBuilder.group({
-      email: ["", [Validators.required,Validators.email]],
+      email: ["", [Validators.required]],
       password: ["", Validators.required],
     });
   }
   //  this.toastrService.warning("Bilgiler bi olamamış sanki!")
 
   login() {
+
+    //ESKİ
     // this.authService.login(this.loginForm.value).subscribe(
     //   (response)=> {
     //     localStorage.setItem('token', response.data.token);
@@ -53,21 +55,21 @@ export class LoginComponent implements OnInit {
 
 
 
-
+    //190323 de commendlendi 
+    //son gün dersiniden yardım alındı
     if (this.loginForm.valid) {
       let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
 
       this.authService.login(loginModel).subscribe({
         next: (response:any) => {
-          //console.log(response.data.token);
-          console.log(response);
           console.log("login compponent login methodu1")
-         // localStorage.setItem('token',response.token )
-          console.log("login compponent login methodu2")
+          //this.toastrService.info(response.message);
+         localStorage.setItem('token',response.data.token )
+          //console.log("login compponent login methodu2")
 
-          this.localStorge.set('token',response.token );
-          console.log("login compponent login methodu3")
-          this.toastrService.info("Giriş Başarılı FE");
+          //this.localStorge.set('token',response.token );
+          //console.log("login compponent login methodu3")
+          this.toastrService.info("Giriş Başarılı");
           this.router.navigate(['rentals/getdetails']);
           this.getUser(loginModel.email);
           console.log("login compponent login methodu4")
@@ -85,6 +87,23 @@ export class LoginComponent implements OnInit {
     else{
       this.toastrService.warning("HATA!");
     }
+
+
+
+    // if(this.loginForm.valid){
+    //   console.log(this.loginForm.value);
+    //    let loginModel=Object.assign({},this.loginForm.value)
+    //    this.authService.login(loginModel).subscribe(response =>{
+    //     this.toastrService.info(response.message);
+    //     //console.log(response)
+    //     localStorage.setItem("token",response.data.token)
+    //   },responseError=>{
+    //     console.log(responseError);
+    //     this.toastrService.error(responseError.error)
+    //   })
+
+    // }
+
 
     
    

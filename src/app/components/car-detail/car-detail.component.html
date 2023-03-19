@@ -13,7 +13,7 @@
         <div class="row">
           <div *ngFor="let carImage of carImages" class="col-md-9">
             <img
-              src="https://localhost:44389/{{ carImage.imagePath }}"
+              src="{{ baseUrl+ carImage.imagePath }}"
               class="d-block w-100"
               width="800"
               height="400"

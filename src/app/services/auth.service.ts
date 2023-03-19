@@ -4,6 +4,7 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginModel } from '../models/entities/loginModel';
 import { RegisterModel } from '../models/entities/registerModel';
+import { ResponseModel } from '../models/responses/responseModel';
 import { SingleResponseModel } from '../models/responses/singleResponseModel';
 import { TokenModel } from '../models/tokenModel';
 import { LocalStorageService } from './local-storge.service';
@@ -17,17 +18,39 @@ export class AuthService {
     private httpClient: HttpClient
   ) {}
 
-  login(user: LoginModel): Observable<SingleResponseModel<TokenModel>> {
-    let newPath = this.apiUrl + 'auth/login';
-    return this.httpClient.post<SingleResponseModel<TokenModel>>(
-      newPath,
-      user
-    )
-    ; 
+
+  //190323 de commendlendi 
+    //son gün dersiniden yardım alındı
+  // login(user: LoginModel): Observable<SingleResponseModel<TokenModel>> {
+  //   let newPath = this.apiUrl + 'auth/login';
+  //   return this.httpClient.post<SingleResponseModel<TokenModel>>(
+  //     newPath,
+  //     user
+  //   )
+  //   ; 
+
+  // }
+
+  login(loginModel:LoginModel){
+    return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + 'auth/login',loginModel )
 
   }
 
 
+  isAuthenticated(){
+    if(localStorage.getItem("token")){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+   //190323 de commendlendi 
+    //son gün dersiniden yardım alındı
+  // isAuthenticated(){
+  //   return sessionStorage.getItem("token");   //!!!!
+  // }
 
   register(
     registerModel: RegisterModel
@@ -36,9 +59,7 @@ export class AuthService {
     return this.httpClient.post<SingleResponseModel<TokenModel>>(newPath,registerModel)
   }
 
-  isAuthenticated(){
-    return sessionStorage.getItem("token");
-  }
+
 
   logOut(){
     sessionStorage.removeItem("token");

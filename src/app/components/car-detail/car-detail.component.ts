@@ -10,7 +10,8 @@ import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { LocalStorageService } from 'src/app/services/local-storge.service';
 import { RentalService } from 'src/app/services/rental.service';
-//import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-car-detail',
@@ -18,6 +19,7 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./car-detail.component.css'],
 })
 export class CarDetailComponent implements OnInit {
+  baseUrl=environment.baseUrl;
   carDetails: CarDetailDto[] = [];
   car: Car;
   carImages: CarImage[] = [];
@@ -77,7 +79,7 @@ export class CarDetailComponent implements OnInit {
   // }
 
   getImageSource(carImage: CarImage): string {
-    let url: string = "https://localhost:44389" + carImage.imagePath;
+    let url: string = this.baseUrl + carImage.imagePath;
     return url;
   }
 
