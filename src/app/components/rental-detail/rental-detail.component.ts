@@ -19,11 +19,13 @@ filterText="";
 
   ngOnInit(): void {
     this.getRentalDetails();
-    this.toastrService.info("Tüm kiralama işlemleri listelendi")
+    
   }
   getRentalDetails(){this.rentalService.getRentalDetails()
   .subscribe(response=>{this.rentalDetails=response.data;
-  this.dataLoaded=true;})}
+  this.dataLoaded=true;})
+  this.toastrService.info("Tüm kiralama işlemleri listelendi")
+}
 
 
 

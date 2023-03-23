@@ -44,7 +44,7 @@ export class RentalComponent implements OnInit {
   createAddRentCarForm() {
     this.addRentCarForm = this.formBuilder.group({
       carId: [this.carId, Validators.required],
-      customerId: [this.localStorageService.getCurrentUser().userId==1, Validators.required], //burayda yanlışlık olablir
+      customerId: [2, Validators.required], //burayda yanlışlık olablir
       rentDate: ['', [Validators.required]],
       returnDate: ['', Validators.required]
 
@@ -76,7 +76,9 @@ export class RentalComponent implements OnInit {
 
     this.toastrService.success("Yallah ödeme sayfasına")
     console.log("rental eklendi")
-    return this.rentalService.addRental(this.rental)
+    //return this.rentalService.addRental(this.rental)
+    return this.router.navigate(['/rentals/getdetails']);
+
 
   }
 
