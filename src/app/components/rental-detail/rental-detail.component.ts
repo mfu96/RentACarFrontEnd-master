@@ -24,7 +24,7 @@ filterText="";
   getRentalDetails(){this.rentalService.getRentalDetails()
   .subscribe(response=>{this.rentalDetails=response.data;
   this.dataLoaded=true;})
-  this.toastrService.info("Tüm kiralama işlemleri listelendi")
+  this.toastrService.info("Tüm kiralama işlemleri listelendi");
 }
 
 
