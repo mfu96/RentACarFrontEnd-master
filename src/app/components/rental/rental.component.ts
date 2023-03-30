@@ -24,11 +24,11 @@ export class RentalComponent implements OnInit {
   // addRentCarForm: FormGroup;
   // currentDate: Date = new Date();
 
-  currentCar: Car;
+  currentCar: CarDetailDto;
   isLoaded = false;
   rentDate: Date;
   returnDate: Date;
-  rental: Rental = new Rental();
+  car:Car
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,21 +47,33 @@ export class RentalComponent implements OnInit {
     // this.carId = parseInt(this.activatedRoute.snapshot.paramMap.get('carId'));
     // this.createAddRentCarForm();
 
-   
-    
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['carId']) {
+        this.getCarById(params['carId']);
+      } else {
+        console.log('İstek yok');
+
+        console.log('Not a valid request!');
+      }
+    });
+
+
+
+ 
 
   }
 
-
-  getCarsByDetail(carId: number) {
+  getCarById(carId: number) {
     this.carService.getCarsByDetail(carId).subscribe((response) => {
-      this.currentCar = response.data;
+     this.currentCar = response.data[0];
       this.isLoaded = true;
     });
   }
 
+   
 
- 
+
+
 
   // createAddRentCarForm() {
   //   this.addRentCarForm = this.formBuilder.group({

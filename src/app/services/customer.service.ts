@@ -12,6 +12,9 @@ import { ListResponseModel } from '../models/responses/listResponseModel';
 export class CustomerService {
   apiUrl =environment.apiUrl;
 
+  private currentUser: Customer;
+
+
   constructor(private httpClient: HttpClient) {}
   getCustomerDetails(): Observable<ListResponseModel<CustomerDetailDto>> {
     let newPath= this.apiUrl +"customers/getdetails"
@@ -23,5 +26,9 @@ export class CustomerService {
   getCustomer():Observable<ListResponseModel<Customer>>{
     let newPath=this.apiUrl + "customers/getall"
     return this.httpClient.get<ListResponseModel<Customer>>(newPath)
+  }
+
+  getCurrentUser(): Customer {
+    return this.currentUser;
   }
 }

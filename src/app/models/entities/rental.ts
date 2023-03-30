@@ -1,4 +1,4 @@
-export class Rental{
+export interface Rental{
     rentId?:number;
     carId:number;
     customerId:number;

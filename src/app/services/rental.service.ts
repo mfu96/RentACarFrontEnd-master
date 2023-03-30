@@ -13,6 +13,8 @@ import { ResponseModel } from '../models/responses/responseModel';
 export class RentalService {
   apiUrl =environment.apiUrl;
   rentingCar:Rental;
+  private currentRental: Rental;
+
 
   constructor(private httpClient: HttpClient) { }
   getRentalDetails(): Observable<ListResponseModel<RentalDetailDto>> {
@@ -47,4 +49,9 @@ export class RentalService {
  removeRentingCar() {
     this.rentingCar = null
  }
+
+   // tslint:disable-next-line:typedef
+   setCurrentRental(rental: Rental) {
+    this.currentRental = rental;
+  }
 }
