@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/entities/car';
@@ -21,14 +22,9 @@ export class RentalComponent implements OnInit {
   // rental:Rental;
   // carId:number;
 
-  // addRentCarForm: FormGroup;
-  // currentDate: Date = new Date();
+   addRentCarForm: FormGroup;
+   currentDate: Date = new Date();
 
-  currentCar: CarDetailDto;
-  isLoaded = false;
-  rentDate: Date;
-  returnDate: Date;
-  car:Car
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -44,32 +40,19 @@ export class RentalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.carId = parseInt(this.activatedRoute.snapshot.paramMap.get('carId'));
-    // this.createAddRentCarForm();
-
-    this.activatedRoute.params.subscribe((params) => {
-      if (params['carId']) {
-        this.getCarById(params['carId']);
-      } else {
-        console.log('İstek yok');
-
-        console.log('Not a valid request!');
-      }
-    });
-
-
+    this.addRentCarForm=this.formBuilder.group({
+       
+    })
+ 
 
  
 
   }
+  
+  createRental(){
 
-  getCarById(carId: number) {
-    this.carService.getCarsByDetail(carId).subscribe((response) => {
-     this.currentCar = response.data[0];
-      this.isLoaded = true;
-    });
   }
-
+  
    
 
 
