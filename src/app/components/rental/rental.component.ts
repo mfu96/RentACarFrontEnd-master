@@ -25,6 +25,7 @@ export class RentalComponent implements OnInit {
    addRentCarForm: FormGroup;
    currentDate: Date = new Date();
 
+   carDetails:CarDetailDto[]=[]
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,19 +41,20 @@ export class RentalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.addRentCarForm=this.formBuilder.group({
        
-    })
- 
-
+console.log("11")
  
 
   }
+
+
   
-  createRental(){
+  addToCart(detail:CarDetailDto){
+    this.toastrService.info("Sepete Eklendi",detail.carName)
+    console.log(detail)
 
   }
-  
+
    
 
 

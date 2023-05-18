@@ -128,4 +128,12 @@ export class CarDetailComponent implements OnInit {
     }
   }
 
+  addToCart(detail:CarDetailDto){
+
+    
+    this.toastrService.info("Sepete Eklendi",detail.carName)
+    console.log(detail)
+
+  }
+
 }

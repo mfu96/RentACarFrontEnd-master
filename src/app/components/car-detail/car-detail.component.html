@@ -54,9 +54,9 @@
             <td>{{ detail.unitPrice }}</td>
             <td>
               <button
+                (click)="addToCart(detail)"
                 type="button"
-                class="btn btn-success"
-                routerLink="/rental"
+                class="btn btn-success btn-xs"                
               >
                 Kirala
               </button>
