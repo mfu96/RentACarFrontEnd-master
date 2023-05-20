@@ -8,6 +8,7 @@ import { CustomerDetailComponent } from './components/customer-detail/customer-d
 import { CustomerComponent } from './components/customer/customer.component';
 import { RentalDetailComponent } from './components/rental-detail/rental-detail.component';
 import { RentalComponent } from './components/rental/rental.component';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path:"", pathMatch:"full", component:RentalDetailComponent},
@@ -22,7 +23,7 @@ const routes: Routes = [
   {path: "cars/category/:categoryId", component:CarComponent},
   {path: "cars/brand/:brandId", component:CarComponent},
   {path: "cars/color/:colorId", component:CarComponent},
-  {path: "cars/detail/:carId", component:CarDetailComponent},
+  {path: "cars/detail/:carId", component:CarDetailComponent ,canActivate:[LoginGuard]},
   {path: "cars", component:CarComponent},
   {path: "cars/carImage/:id", component:CarImageComponent}
   

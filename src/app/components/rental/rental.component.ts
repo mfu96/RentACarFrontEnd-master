@@ -19,151 +19,65 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./rental.component.css'],
 })
 export class RentalComponent implements OnInit {
-  // rental:Rental;
-  // carId:number;
+ customers:Customer[];
 
-   addRentCarForm: FormGroup;
-   currentDate: Date = new Date();
+ customerId: number;
+ rentDate: Date;
+ returnDate: Date;
 
-   carDetails:CarDetailDto[]=[]
+
+   @Input() car:Car;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private authService:AuthService,
-    private toastrService: ToastrService,
-    private customerService: CustomerService,
-    private carService: CarService,
-
-    private formBuilder: FormBuilder,
-    private localStorageService: LocalStorageService,
-    private rentalService: RentalService,
-    private router: Router
+    private rentalService:RentalService,
+    private customerService:CustomerService,
+    private toastrService:ToastrService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
        
-console.log("11")
+this.getCustomer();
  
 
   }
 
-
-  
-  addToCart(detail:CarDetailDto){
-    this.toastrService.info("Sepete Eklendi",detail.carName)
-    console.log(detail)
+  getCustomer(){
+    this.customerService.getCustomerDetails().subscribe(response =>{
+      this.customers=response.data
+      
+    })
 
   }
 
-   
+  getDate(day:number){
+    var today=new Date();
+    today.setDate(today.getDate()+ day);
+    return today.toISOString().slice(0,10)
+  }
+
+  create(){
+    let rental:Rental={
+      carId: this.car.carId,
+      customerId: parseInt(this.customerId.toString()),
+      rentDate:this.rentDate,
+      returnDate:this.returnDate
+    }
+    this.rentalService.addRental(rental).subscribe(response=>{
+      this.toastrService.info("Ödeme sayfasına");
+      this.toastrService.success("Kiralama Başarılı");
+      return rental.carId;},
+      error=>{
+        this.toastrService.error("Hata")
+        this.toastrService.error("Hooop0000")
+      }
+
+
+      )
+  }
 
 
 
 
-  // createAddRentCarForm() {
-  //   this.addRentCarForm = this.formBuilder.group({
-  //     carId: [this.carId, Validators.required],
-  //     customerId: [2, Validators.required], //burayda yanlışlık olablir
-  //     rentDate: ['', [Validators.required]],
-  //     returnDate: ['', Validators.required]
 
-  //   });
-  // }
-
-  // setRentingCar() {
-  //   if (this.addRentCarForm.invalid) {
-  //     this.toastrService.warning('Tanımsız alan!');
-  //     return false;
-  //   }
-
-  //   this.rental = this.addRentCarForm.value;
-  //   let rentDate = new Date(this.rental.rentDate);
-  //   let returnDate = new Date(this.rental.rentDate);
-
-  //   if (rentDate < this.currentDate) {
-  //     this.toastrService.warning(
-  //       "Kiralama Tarihi aynı gün olamaz ", "setRentingCar"
-  //     )
-  //     return false;
-
-  //   }
-  //   if (returnDate < rentDate || returnDate.getDate() == rentDate.getDate()) {
-  //     this.toastrService.warning("Dönüş tarihi kiralama tarihinden önce ve eşit olamaz");
-  //     return false;
-  //   }
-  //   this.rentalService.setRentingCar(this.rental);
-
-  //   this.toastrService.success("Yallah ödeme sayfasına")
-  //   console.log("rental eklendi")
-  //   //return this.rentalService.addRental(this.rental)
-  //   return this.router.navigate(['/rentals/getdetails']);
-
-
-  // }
-
-  // checkCarRentable() {
-  //   this.rentalService.getByRentalId(this.carId).subscribe(response => {
-  //     if (response.data[0] == null) {
-  //       this.setRentingCar();
-  //       return true;
-  //     }
-
-  //     let lastItem = response.data[response.data.length - 1];
-
-  //     if (lastItem.returnDate == null) {
-  //       return this.toastrService.error('Araç henüz teslim edilmedi')
-  //     }
-
-  //     let returnDate = new Date(lastItem.returnDate)
-  //     this.setRentingCar();
-
-  //     if(new Date(this.rental.rentDate)<returnDate){
-  //       this.rentalService.removeRentingCar();
-  //       this.toastrService.warning("Araç bu tarhiler arasında kiralanamaz")
-  //     }
-
-  //     return true;
-
-  //   })
-  // }
-
-
- // isLogOK(){
-    //  return true
-    // }
-  
-  
-  
-    // getCustomer() {
-    //   this.customerService.getCustomer().subscribe((response) => {
-    //     this.customers = response.data;
-    //     console.log("customer çalıştı mı?")
-    //   });
-    // }
-  
-    // //Bu günün tarihini veriyor  YYYY-AA-GG
-    // getDate(day: number) {
-    //   var today = new Date();
-    //   today.setDate(today.getDate() + day);
-    //   console.log(today.toISOString().slice(0, 10));
-    //   return today.toISOString().slice(0, 10);
-    // }
-  
-    // create() {
-    //   let rental: Rental = 
-    //   {
-    //     carId: this.car.carId,
-    //     customerId: parseInt(this.customerId.toString()),
-    //     rentDate:this.rentDate,
-    //     returnDate:this.returnDate
-    //   };
-    //   this.rentalService.addRental(rental).subscribe(response=>{
-    //     this.toastrService.success("Kiralama Başarılı");
-        
-    //   },error=>{
-    //     console.info(error)
-    //     this.toastrService.warning("Kiaralama başarısız")
-    //   })
-  
-    // }
 }

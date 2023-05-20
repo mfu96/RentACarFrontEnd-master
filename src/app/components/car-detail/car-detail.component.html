@@ -27,7 +27,7 @@
       <table *ngIf="dataLoaded == true" class="table">
         <thead>
           <tr>
-            <th>Araba No</th>
+            <th >Araba No</th>
             <th>Araba İsmi</th>
             <th>Kategori</th>
             <th>Marka</th>
@@ -52,15 +52,8 @@
             <td>{{ detail.colorName }}</td>
             <td>{{ detail.unitsInStock }}</td>
             <td>{{ detail.unitPrice }}</td>
-            <td>
-              <button
-                (click)="addToCart(detail)"
-                type="button"
-                class="btn btn-success btn-xs"                
-              >
-                Kirala
-              </button>
-            </td>
+       
+            <td><app-rental [car]="car"></app-rental> </td>
           </tr>
         </tbody>
       </table>

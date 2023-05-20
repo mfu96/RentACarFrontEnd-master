@@ -20,7 +20,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CarDetailComponent implements OnInit {
   baseUrl=environment.baseUrl;
-  carDetails: CarDetailDto[] = [];
+  carDetails: CarDetailDto [];
   car: Car;
   carImages: CarImage[] = [];
   currentDetail: CarDetailDto;
@@ -88,6 +88,7 @@ export class CarDetailComponent implements OnInit {
     this.carService.getCarsByDetail(carId).subscribe((respone) => {
       this.carDetails = respone.data;
       this.dataLoaded = true;
+
     });
   }
   getImageByCarId(carid: number) {
