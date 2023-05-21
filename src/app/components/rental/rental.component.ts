@@ -26,7 +26,7 @@ export class RentalComponent implements OnInit {
  returnDate: Date;
 
 
-   @Input() car:Car;
+   @Input() car:CarDetailDto;
 
   constructor(
     private rentalService:RentalService,
@@ -41,6 +41,8 @@ this.getCustomer();
  
 
   }
+
+ 
 
   getCustomer(){
     this.customerService.getCustomerDetails().subscribe(response =>{
@@ -68,6 +70,7 @@ this.getCustomer();
       this.toastrService.success("Kiralama Başarılı");
       return rental.carId;},
       error=>{
+        console.info(error)
         this.toastrService.error("Hata")
         this.toastrService.error("Hooop0000")
       }
