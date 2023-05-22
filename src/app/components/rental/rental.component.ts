@@ -68,8 +68,8 @@ this.getCustomer();
     this.rentalService.addRental(rental).subscribe(response=>{
       this.toastrService.info("Ödeme sayfasına");
       this.toastrService.success("Kiralama Başarılı");
-      return rental.carId;},
-      error=>{
+      this.router.navigate(["/payment", JSON.stringify(rental)]);
+    },error=>{
         console.info(error)
         this.toastrService.error("Hata")
         this.toastrService.error("Hooop0000")

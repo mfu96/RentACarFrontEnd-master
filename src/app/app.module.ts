@@ -26,6 +26,7 @@ import { CarFilterComponent } from './components/car-filter/car-filter.component
 import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { CreditCardComponent } from './components/credit-card/credit-card/credit-card.component';
 
 
 
@@ -50,7 +51,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     FilterColorPipe,
     FilterCategoryPipe,
     CarFilterComponent,
-    LoginComponent
+    LoginComponent,
+    CreditCardComponent
     
     
   ],
