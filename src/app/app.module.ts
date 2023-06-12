@@ -27,6 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { CreditCardComponent } from './components/credit-card/credit-card/credit-card.component';
+import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 
 
 
@@ -52,7 +53,8 @@ import { CreditCardComponent } from './components/credit-card/credit-card/credit
     FilterCategoryPipe,
     CarFilterComponent,
     LoginComponent,
-    CreditCardComponent
+    CreditCardComponent,
+    CartSummaryComponent
     
     
   ],

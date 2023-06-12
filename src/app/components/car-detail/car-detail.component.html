@@ -35,6 +35,7 @@
             <th>Stok Adedi</th>
             <th>Günlük Ücreti</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -52,6 +53,7 @@
             <td>{{ detail.colorName }}</td>
             <td>{{ detail.unitsInStock }}</td>
             <td>{{ detail.unitPrice }}</td>
+            <td><button (click)="addToCart(detail)" class="btn btn-success">Sepete Ekle</button></td>
        
             <td><app-rental [car]="detail"></app-rental> </td>
           </tr>
