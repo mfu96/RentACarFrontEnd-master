@@ -1,6 +1,6 @@
 import { Car } from "./car";
 
-export class cartItem{
+export class CartItem{
     car:Car;
     quantity:number;
 

@@ -1,11 +1,26 @@
-<li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Sepetiniz
+<li *ngIf="cartItems" class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Sepetiniz 
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <li><a *ngFor="let cartItem of cartItems" class="dropdown-item" >{{cartItem.car.carName}}</a></li>
+      <li  *ngFor="let cartItem of cartItems"><a class="dropdown-item" >{{cartItem.car.carName}}</a></li>
 
       <li><hr class="dropdown-divider"></li>
       <li><a class="dropdown-item" >Sepete Git</a></li>
     </ul>
   </li>
+
+
+
+
+  <!-- <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Dropdown
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+  </li> -->

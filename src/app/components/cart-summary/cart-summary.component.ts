@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { cartItem } from 'src/app/models/entities/cartItem';
+import { CartItem } from 'src/app/models/entities/cartItem';
 
 @Component({
   selector: 'app-cart-summary',
@@ -8,7 +8,7 @@ import { cartItem } from 'src/app/models/entities/cartItem';
 })
 export class CartSummaryComponent implements OnInit {
 
- cartItems:cartItem[];
+ cartItems:CartItem[];
  
   constructor() { }
 

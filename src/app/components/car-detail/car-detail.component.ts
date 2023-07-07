@@ -8,6 +8,7 @@ import { CarImage } from 'src/app/models/entities/carImage';
 import { Rental } from 'src/app/models/entities/rental';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
+import { CartService } from 'src/app/services/cart.service';
 import { LocalStorageService } from 'src/app/services/local-storge.service';
 import { RentalService } from 'src/app/services/rental.service';
 import { environment } from 'src/environments/environment';
@@ -37,7 +38,8 @@ export class CarDetailComponent implements OnInit {
     private carService: CarService,
     private carImageService: CarImageService,
     private activatedRoute: ActivatedRoute,
-    private toastrService:ToastrService
+    private toastrService:ToastrService,
+    private cartService:CartService
     
 
   ) { }
@@ -133,6 +135,7 @@ export class CarDetailComponent implements OnInit {
 
     
     this.toastrService.info("Sepete Eklendi",detail.carName)
+    this.cartService.addToCart(this.car)
     console.log(detail)
 
   }
