@@ -53,7 +53,7 @@
             <td>{{ detail.colorName }}</td>
             <td>{{ detail.unitsInStock }}</td>
             <td>{{ detail.unitPrice }}</td>
-            <td><button (click)="addToCart(detail)" class="btn btn-success">Sepete Ekle</button></td>
+            <td><button (click)="addToCartDetail(detail)" class="btn btn-success">Sepete Ekle</button></td>
        
             <td><app-rental [car]="detail"></app-rental> </td>
           </tr>

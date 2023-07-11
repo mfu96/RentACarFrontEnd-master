@@ -131,11 +131,11 @@ export class CarDetailComponent implements OnInit {
     }
   }
 
-  addToCart(detail:CarDetailDto){
+  addToCartDetail(detail:CarDetailDto){
 
     
     this.toastrService.info("Sepete Eklendi",detail.carName)
-    this.cartService.addToCart(this.car)
+    this.cartService.addToCartDetail(detail)
     console.log(detail)
 
   }
