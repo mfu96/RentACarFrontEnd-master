@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Car } from 'src/app/models/entities/car';
+import { CarDetailDto } from 'src/app/models/entities/carDetailDto';
+import { Rental } from 'src/app/models/entities/rental';
 
 @Component({
   selector: 'app-credit-card',
@@ -6,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./credit-card.component.css']
 })
 export class CreditCardComponent implements OnInit {
+
 
   constructor() { }
 

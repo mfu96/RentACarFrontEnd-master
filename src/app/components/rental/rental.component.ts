@@ -52,6 +52,14 @@ this.getCustomer();
 
   }
 
+  
+  getCustomerId(cusid:number){
+    this.customerService.getCustomerId(cusid).subscribe(response =>{
+      this.customers=response.data;
+
+    })
+  }
+
   getDate(day:number){
     var today=new Date();
     today.setDate(today.getDate()+ day);

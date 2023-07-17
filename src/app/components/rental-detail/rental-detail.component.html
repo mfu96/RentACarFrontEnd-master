@@ -42,8 +42,8 @@
                         <td>{{detail.rentId}}</td>
                         <td>{{detail.carName | uppercase}}</td>
                         <td>{{detail.companyName | uppercase}}</td>
-                        <td>{{detail.rentDate}}</td>
-                        <td>{{detail.returnDate}}</td>
+                        <td>{{detail.rentDate | date:'d MMMM y':null}}</td>
+                        <td>{{detail.returnDate | date:'d MMMM y':null}}</td>
                         <td>{{detail.unitPrice}}</td>
                     </tr>
                 </tbody>

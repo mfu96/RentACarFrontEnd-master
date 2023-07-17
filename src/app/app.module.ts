@@ -28,6 +28,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { CreditCardComponent } from './components/credit-card/credit-card/credit-card.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 
 
@@ -54,7 +55,8 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
     CarFilterComponent,
     LoginComponent,
     CreditCardComponent,
-    CartSummaryComponent
+    CartSummaryComponent,
+    PaymentComponent
     
     
   ],
