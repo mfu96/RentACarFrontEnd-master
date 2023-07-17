@@ -43,9 +43,12 @@
          <label for="customer" class="col-4 col-form-label">Customer :</label>
          <div class="form-group row mb-2">
            <div class="col-8">
-             <select *ngFor="let customer of customers" class="form-select" >
-               
-             </select>
+            <select [(ngModel)]="customerId" class="form-select" >
+              <option *ngFor="let customer of customers"
+               [value]="customer.customerId" [value]="getCustomerId(customerId)" >
+                {{ customer.companyName }}
+              </option>
+            </select>
            </div>
          </div>
  
