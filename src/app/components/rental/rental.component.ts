@@ -32,12 +32,19 @@ export class RentalComponent implements OnInit {
     private rentalService:RentalService,
     private customerService:CustomerService,
     private toastrService:ToastrService,
-    private router:Router
+    private router:Router,
+    private activatedRoute:ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    //this.getCustomer();
+
+
+    //car componentten bak
+    this.activatedRoute.params.subscribe
+
        
-this.getCustomer();
+
  
 
   }
@@ -53,8 +60,8 @@ this.getCustomer();
   }
 
   
-  getCustomerId(cusid:number){
-    this.customerService.getCustomerId(cusid).subscribe(response =>{
+  getCustomerId(customerid:number){
+    this.customerService.getCustomerId(customerid).subscribe(response =>{
       this.customers=response.data;
 
     })
