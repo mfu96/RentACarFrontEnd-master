@@ -29,6 +29,7 @@ const routes: Routes = [
   {path: "payment", component:CreditCardComponent}
   
   
+  
 ];
 
 @NgModule({
