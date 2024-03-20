@@ -40,6 +40,7 @@ export class PaymentComponent implements OnInit {
     private paymentService:PaymentService) { }
 
   ngOnInit(): void {
+    
   }
 
 }

@@ -28,7 +28,7 @@ export class LoginGuard implements CanActivate {
       }
       else{
         this.roter.navigate(["login"])
-        this.toastrService.info("Sisteme giriş yapmalısınız!")
+        this.toastrService.error("Sisteme giriş yapmalısınız!")
         return false;
       }
 
