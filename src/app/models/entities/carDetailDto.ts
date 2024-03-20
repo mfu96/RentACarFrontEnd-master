@@ -8,5 +8,6 @@ export interface CarDetailDto{
    colorName:string;
    unitsInStock:number;
    unitPrice:number;
+   companyName:string;
    imagePaths:CarImage[];
 }

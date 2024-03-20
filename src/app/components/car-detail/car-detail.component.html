@@ -34,6 +34,7 @@
             <th>Renk</th>
             <th>Stok Adedi</th>
             <th>Günlük Ücreti</th>
+            <th>Satıcı</th>
             <th></th>
             <th></th>
           </tr>
@@ -53,6 +54,7 @@
             <td>{{ detail.colorName }}</td>
             <td>{{ detail.unitsInStock }}</td>
             <td>{{ detail.unitPrice }}</td>
+            <td>{{detail.companyName}}</td>
             <td><button (click)="addToCartDetail(detail)" class="btn btn-success">Sepete Ekle</button></td>
        
             <td><app-rental [car]="detail"></app-rental> </td>
