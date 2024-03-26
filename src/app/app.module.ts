@@ -29,6 +29,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { CreditCardComponent } from './components/credit-card/credit-card/credit-card.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { HomeScreenComponent } from './components/home-screen/home-screen/home-screen.component';
 
 
 
@@ -56,7 +57,8 @@ import { PaymentComponent } from './components/payment/payment.component';
     LoginComponent,
     CreditCardComponent,
     CartSummaryComponent,
-    PaymentComponent
+    PaymentComponent,
+    HomeScreenComponent
     
     
   ],
