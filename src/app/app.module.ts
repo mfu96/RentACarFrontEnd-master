@@ -30,6 +30,7 @@ import { CreditCardComponent } from './components/credit-card/credit-card/credit
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { HomeScreenComponent } from './components/home-screen/home-screen/home-screen.component';
+import { CurrencySymbolSuffixPipe } from './pipes/currency-symbol-suffix.pipe';
 
 
 
@@ -58,7 +59,8 @@ import { HomeScreenComponent } from './components/home-screen/home-screen/home-s
     CreditCardComponent,
     CartSummaryComponent,
     PaymentComponent,
-    HomeScreenComponent
+    HomeScreenComponent,
+    CurrencySymbolSuffixPipe
     
     
   ],
@@ -75,7 +77,7 @@ import { HomeScreenComponent } from './components/home-screen/home-screen/home-s
     
   ],
   providers: [
-    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor, multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor, multi:true},
   ],
   bootstrap: [AppComponent]
 })

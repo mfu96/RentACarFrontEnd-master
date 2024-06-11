@@ -34,28 +34,28 @@
             <table *ngIf="dataLoaded==true" class="table">
                 <thead>
                     <tr>
-                        <th>Araba No</th>
-                        <th>Araba İsmi</th>
-                        <th>Kategori No</th>
-                        <th>Marka No</th>
-                        <th>Renk No</th>
-                        <th>Model Yılı</th>
-                        <th>Ücreti</th>
-                        <th>Stok Adedi</th>
-                        <th>Açıklama</th>
+                        <th class="centered">Araba No</th>
+                        <th class="centered">Araba İsmi</th>
+                        <th class="centered">Kategori No</th>
+                        <th class="centered">Marka No</th>
+                        <th class="centered">Renk No</th>
+                        <th class="centered">Model Yılı</th>
+                        <th class="centered">Ücreti</th>
+                        <th class="centered">Stok Adedi</th>
+                        <th class="centered">Açıklama</th>
                     </tr>
                 </thead>
                 <tr *ngFor="let car of cars">
-                    <td>{{car.carId}}</td>
+                    <td class="centered">{{car.carId}}</td>
                     <td (click)="setCurrentCar(car)" routerLink="/cars/detail/{{car.carId}}"
                         [class]="getCurrentCarClass(car)">{{car.carName}}</td>
-                    <td>{{car.categoryId}}</td>
-                    <td>{{car.brandId}}</td>
-                    <td>{{car.colorId}}</td>
-                    <td>{{car.modelYear}}</td>
-                    <td>{{car.unitPrice|currency:'₺'}}</td>
-                    <td>{{car.unitsInStock}}</td>
-                    <td>{{car.description}}</td>
+                        <td class="centered">{{car.categoryId}}</td>
+                    <td class="centered">{{car.brandId}}</td>
+                    <td class="centered">{{car.colorId}}</td>
+                    <td class="centered">{{car.modelYear}}</td>
+                    <td class="centered">{{car.unitPrice|currencySymbolSuffix:'₺'}}</td>
+                    <td class="centered">{{car.unitsInStock}}</td>
+                    <td class="centered">{{car.description}}</td>
                 </tr>
 
 

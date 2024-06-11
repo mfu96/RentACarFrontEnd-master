@@ -60,3 +60,20 @@
   {{brand.brandName }}
 
 </li>
+
+<div class="mb-3">
+  <label for="filterText" class="form-label">Markayı Aramak İçin Buraya Yazın</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="TOGG">
+  <!-- ngModel için FormsModel'i import etmeyi unutma  -->
+</div>
+<div *ngIf="filterText.length > 2" class="alert alert-success">
+  <!-- bu alert'ler ile ilgili 19. gün 44. dakika veya get/bootstrap  -->
+  {{ filterText }} aradınız
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let brand of brands | filterBrand:filterText" [class]="getCurrentBrandClass(brand)">
+    <input class="form-check-input me-1" type="checkbox" value="" [id]="brand.brandId">
+    <label (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.brandId}}" class="form-check-label" [for]="brand.brandId">{{ brand.brandName }}</label>
+  </li>
+</ul>
