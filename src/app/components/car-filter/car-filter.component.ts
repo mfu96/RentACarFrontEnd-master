@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/entities/brand';
 import { Color } from 'src/app/models/entities/color';
 import { BrandService } from 'src/app/services/brand.service';
@@ -14,6 +13,7 @@ export class CarFilterComponent implements OnInit {
 
   brands:Brand[];
   colors:Color[];
+  
 
 
   filterText="";
@@ -21,16 +21,25 @@ export class CarFilterComponent implements OnInit {
   selectedColor:string=null;
   routeLink="";
 
+
+  
+
   constructor(private brandService:BrandService,
     private colorService:ColorService,
-    private toastrService:ToastrService) { }
+  
+  ) { }
 
   ngOnInit(): void {
 
+//burada olmasının sebebi başlangıçta markları ve renkleri listeleyebilmesi için
      this.getBrands();
     this.getColors();
+
     
   }
+
+//BEN
+
 
   checkFilterClass(){
     if(this.selectedBrand||this.selectedColor)
@@ -45,7 +54,7 @@ export class CarFilterComponent implements OnInit {
   routingLink(){
     if(this.selectedBrand!=null&&this.selectedColor!=null)
     {
-      return "/cars/brand/"+this.selectedBrand+"/cars/color/"+this.selectedColor
+      return "/cars/filter/"+this.selectedBrand+"/"+this.selectedColor
       
     }
     else if(this.selectedBrand!=null&& this.selectedColor==null)
@@ -77,5 +86,11 @@ export class CarFilterComponent implements OnInit {
     })
   }
   
+
+  //--
+
+
+
+
 
 }

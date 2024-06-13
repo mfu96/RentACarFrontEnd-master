@@ -55,12 +55,15 @@ export class CarDetailComponent implements OnInit {
         this.getCarsByDetail(params['carId']);
         this.getImageByCarId(params["carId"]);
       }
+
+     
       else {
         this.getCarDetails();
         this.toastrService.info("Tüm araçların detayları listelendi")
       }
     });
   }
+
 
   
 

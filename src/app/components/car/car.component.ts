@@ -38,12 +38,17 @@ export class CarComponent implements OnInit {
       if (params['categoryId']) {
         this.getCarsByCategory(params['categoryId']);
       }
+      else if ( params['brandId'] && params['colorId'])
+        {
+          this.getCarsByBrandAndColor(params['brandId'], params['colorId']);
+        }
       else if(params["brandId"]){
         this.getCarsByBrand(params["brandId"]);
       }
       else if(params["colorId"]){
         this.getCarsByColor(params["colorId"]);
       }
+      
       // else if (params["carId"]){
       //   this.getCarsByDetail(params["carId"]);
       // }
@@ -53,6 +58,17 @@ export class CarComponent implements OnInit {
       this.toastrService.info("Tüm araçlar listlendi")
     }
     });
+  }
+
+
+  
+  getCarsByBrandAndColor(brandId: number, colorId: number) {
+    this.carService
+      .getCarsByBrandAndColor(brandId, colorId)
+      .subscribe((response) => {
+        this.cars = response.data;
+        this.dataLoaded = true;
+      });
   }
 
   getCars() {
