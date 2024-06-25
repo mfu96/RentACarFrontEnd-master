@@ -18,6 +18,9 @@ export class CarComponent implements OnInit {
   cars: Car[] = [];
   colors: Color[] = [];
   brands: Brand[]=[];
+
+  selectedBrandIds: number[] = [];
+
   carDetails: CarDetailDto[] = [];
   carByDetail:CarDetailDto[]=[];
   currentCar:Car;
@@ -41,6 +44,9 @@ export class CarComponent implements OnInit {
       else if ( params['brandId'] && params['colorId'])
         {
           this.getCarsByBrandAndColor(params['brandId'], params['colorId']);
+        }
+        else if (params['brandId']) {
+          this.getCarsByBrands(params['brandId'].split(',').map(Number));
         }
       else if(params["brandId"]){
         this.getCarsByBrand(params["brandId"]);
@@ -99,6 +105,13 @@ export class CarComponent implements OnInit {
   }
   getCarsByBrand(brandId: number) {
     this.carService.getCarsByBrand(brandId).subscribe(response => {
+      this.cars = response.data;
+      this.dataLoaded = true;
+    });
+  }
+
+  getCarsByBrands(brandId: number[]) {
+    this.carService.getCarsByBrands(brandId).subscribe(response => {
       this.cars = response.data;
       this.dataLoaded = true;
     });

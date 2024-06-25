@@ -3,6 +3,7 @@ import { Brand } from 'src/app/models/entities/brand';
 import { BrandService } from 'src/app/services/brand.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,6 +19,8 @@ export class BrandComponent implements OnInit {
   filterText="";
   selectedBrand:string=null;
 
+  selectedBrandIds: number[] = [];
+
   brandForm = new FormGroup({
     brand: new FormControl(this.brands),
   });
@@ -26,6 +29,7 @@ export class BrandComponent implements OnInit {
 
   //private yazmamızın sebebi dışardaki classlar'dan ulaşılmasını engellemek
   constructor(private brandService: BrandService,
+    private router: Router,
     private toastrService:ToastrService) {}
   //constractor C#/Java/Python dillerinini hepsinde instance'sini
   //üretmek için vardır(new'lemek için)
@@ -60,5 +64,21 @@ export class BrandComponent implements OnInit {
       return 'list-group-item';
     }
   }
+
+
+  onBrandSelect(brandId: number, event: any): void {
+    if (event.target.checked) {
+      this.selectedBrandIds.push(brandId);
+    } else {
+      const index = this.selectedBrandIds.indexOf(brandId);
+      if (index > -1) {
+        this.selectedBrandIds.splice(index, 1);
+      }
+    }
+  }
+
+  filterCars(): void {
+    const brandIdsParam = this.selectedBrandIds.join(',');
+    this.router.navigate(['/cars/brand', brandIdsParam]);  }
 
 }
