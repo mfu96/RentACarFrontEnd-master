@@ -38,22 +38,34 @@
   </div>
 </form> -->
 
+<div class="row">
+  <div class="col-md-12">
+    <div class="mb-3">
+      <label for="filterText" class="form-label">Markayı Aramak İçin Buraya Yazın</label>
+      <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="TOGG">
+    </div>
+    <div *ngIf="filterText.length > 2" class="alert alert-success">
+      {{ filterText }} aradınız
+    </div>
 
-<div class="mb-3">
-  <label for="filterText" class="form-label">Markayı Aramak İçin Buraya Yazın</label>
-  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="TOGG">
-</div>
-<div *ngIf="filterText.length > 2" class="alert alert-success">
-  {{ filterText }} aradınız
+    <div style="max-height: 300px; overflow-y: auto;">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let brand of (brands | filterBrand:filterText)">
+          <input id="brand_{{ brand.brandId }}" class="form-check-input me-1" type="checkbox" [value]="brand.brandId" (change)="onBrandSelect(brand.brandId, $event)">
+          <!-- buraya click eklenir mi bak? -->
+          <label  for="brand_{{ brand.brandId }}" class="form-check-label">{{ brand.brandName }}</label>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="mb-3 mt-3 d-flex justify-content-center">
+      <button class="btn btn-primary me-3" (click)="filterCars()" type="button">Filtrele</button>
+    </div>
+
+  </div>
 </div>
 
-<ul class="list-group">
-  <li class="list-group-item" *ngFor="let brand of brands | filterBrand:filterText">
-    <input class="form-check-input me-1" type="checkbox" [value]="brand.brandId" (change)="onBrandSelect(brand.brandId, $event)">
-    <label class="form-check-label">{{ brand.brandName }}</label>
-  </li>
-</ul>
-<button (click)="filterCars()">Filtrele</button>
+
 
 
 
@@ -78,21 +90,19 @@
 
 </li>
 
-<div class="mb-3">
+<!-- <div class="mb-3">
   <label for="filterText" class="form-label">Markayı Aramak İçin Buraya Yazın</label>
   <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="TOGG">
-  <!-- ngModel için FormsModel'i import etmeyi unutma  -->
 </div>
 <div *ngIf="filterText.length > 2" class="alert alert-success">
-  <!-- bu alert'ler ile ilgili 19. gün 44. dakika veya get/bootstrap  -->
   {{ filterText }} aradınız
-</div>
+</div> -->
 
-<ul class="list-group">
+<!-- <ul class="list-group">
   <li class="list-group-item" *ngFor="let brand of brands | filterBrand:filterText" [class]="getCurrentBrandClass(brand)">
     <input class="form-check-input me-1" type="checkbox" value="" [id]="brand.brandId">
     <label (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.brandId}}" class="form-check-label" [for]="brand.brandId">{{ brand.brandName }}</label>
   </li>
-</ul>
+</ul> -->
 
 
