@@ -17,7 +17,7 @@ export class BrandComponent implements OnInit {
   dataLoaded = false;
   
   filterText="";
-  selectedBrand:string=null;
+  //selectedBrand:string=null;
 
   selectedBrandIds: number[] = [];
 
@@ -79,6 +79,16 @@ export class BrandComponent implements OnInit {
 
   filterCars(): void {
     const brandIdsParam = this.selectedBrandIds.join(',');
-    this.router.navigate(['/cars/brand', brandIdsParam]);  }
+    this.router.navigate(['/cars/brand', brandIdsParam]);
+
+    const selectedBrandNames = this.selectedBrandIds.map(id => {
+      const brand = this.brands.find(b => b.brandId === id);
+      return brand ? brand.brandName : '';
+    }).join(', ');
+
+    this.toastrService.info(selectedBrandNames +" listeleniyor.");
+  
+
+}
 
 }
