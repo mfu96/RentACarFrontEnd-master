@@ -3,13 +3,56 @@
 </div>
 
 
+<div class="row">
+  <div class="col-md-12">
+    <div class="mb-3 position-relative">
+      <label for="filterText" class="form-label">Kategoriyi Aramak İçin Buraya Yazın</label>
+      <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Ekonomi">
+      <button *ngIf="filterText.length > 0" type="button" class="btn-clear position-absolute"
+              style="top: 50%; right: 10px; transform: translateY(0%);" 
+              (click)="filterText=''">
+        &times;
+      </button>
+    </div>
+    <div *ngIf="filterText.length > 2" class="alert alert-success">
+      {{ filterText }} aradınız
+    </div>
+
+    <div style="max-height: 300px; overflow-y: auto;">
+      <ul class="list-group">
+        
+        
+        <li class="list-group-item" *ngFor="let category of (categories | filterCategory:filterText)">
+          <input id="category_{{ category.categoryId }}" class="form-check-input me-1" type="checkbox"
+           [value]="category.categoryId" (change)="onCategorySelect(category.categoryId, $event)">
+          <!-- buraya click eklenir mi bak? -->
+          <label  for="category_{{ category.categoryId }}" class="form-check-label">{{ category.categoryName }}</label>
+        </li>
+        
+      </ul>
+    </div>
+    
+    <div class="mb-3 mt-3 d-flex justify-content-center">
+      <button class="btn btn-outline-primary me-3" (click)="filterCars()" 
+      type="button" [disabled]="!isFilterActive()">Filtrele</button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+<!-- 
 <div class="mb-3">
   <label for="filterText" class="form-label">Kategoriyi Aramak İçin Buraya Yazın</label>
   <input type="text" [(ngModel)]="filterText"  class="form-control" id="filterText" placeholder="Lüks">
-                      <!-- ngModel için FormsModel'i import etmeyi unutma -->
+                      ngModel için FormsModel'i import etmeyi unutma
 </div>
 <div *ngIf="filterText.length>2" class="alert alert-success">  
-                                  <!-- bu alert'ler ile ilgili 19. gün 44. dakika veya get/bootstrap -->
+                                  bu alert'ler ile ilgili 19. gün 44. dakika veya get/bootstrap
 {{filterText}} aradınız
 </div>
 
@@ -25,4 +68,4 @@
   </li>
   <br />
   <h5 *ngIf="currentCategory">{{ currentCategory.categoryName }}</h5>
-</ul>
+</ul> -->

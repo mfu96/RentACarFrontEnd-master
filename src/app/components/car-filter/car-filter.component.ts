@@ -44,10 +44,10 @@ export class CarFilterComponent implements OnInit {
   checkFilterClass(){
     if(this.selectedBrand||this.selectedColor)
     {
-      return "btn btn-primary me-3"
+      return "btn btn-outline-primary me-3"
     }
     else{
-      return "btn btn-primary me-3 disabled"
+      return "btn btn-outline-primary me-3 disabled"
     }
   }
 

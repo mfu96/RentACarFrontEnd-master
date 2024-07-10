@@ -21,9 +21,9 @@ export class BrandComponent implements OnInit {
 
   selectedBrandIds: number[] = [];
 
-  brandForm = new FormGroup({
-    brand: new FormControl(this.brands),
-  });
+  // brandForm = new FormGroup({
+  //   brand: new FormControl(this.brands),
+  // });
   
 
 
@@ -86,9 +86,10 @@ export class BrandComponent implements OnInit {
       return brand ? brand.brandName : '';
     }).join(', ');
 
-    this.toastrService.info(selectedBrandNames +" listeleniyor.");
-  
-
-}
+    this.toastrService.info(selectedBrandNames +" marka araçlar listeleniyor.");
+  }
+  isFilterActive(): boolean {
+    return this.selectedBrandIds.length > 0;
+  }
 
 }

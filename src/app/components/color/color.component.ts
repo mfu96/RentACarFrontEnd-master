@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Color } from 'src/app/models/entities/color';
 import { ColorService } from 'src/app/services/color.service';
@@ -14,10 +15,13 @@ export class ColorComponent implements OnInit {
   currentColor:Color;
   dataLoaded = false;
   filterText="";
+  selectedColorIds:number[]=[];
+  
 
  
 
   constructor(private colorService: ColorService,
+    private router: Router,
     private toastrService:ToastrService) {}
 
   ngOnInit(): void {
@@ -48,6 +52,35 @@ export class ColorComponent implements OnInit {
     } else {
       return 'list-group-item';
     }
+  }
+
+  
+  onColorSelect(colorId: number, event: any): void {
+    if (event.target.checked) {
+      this.selectedColorIds.push(colorId);
+    } else {
+      const index = this.selectedColorIds.indexOf(colorId);
+      if (index > -1) {
+        this.selectedColorIds.splice(index, 1);
+      }
+    }
+  }
+
+  filterCars(): void {
+    const colorIdsParam = this.selectedColorIds.join(',');
+    this.router.navigate(['/cars/color', colorIdsParam]);
+
+    const selectedcolorNames = this.selectedColorIds.map(id => {
+      const color = this.colors.find(c => c.colorId === id);
+      return color ? color.colorName : '';
+    }).join(', ');
+
+    this.toastrService.info(selectedcolorNames +" rengindeki araçlar listeleniyor.");
+  
+}
+
+  isFilterActive(): boolean {
+    return this.selectedColorIds.length > 0;
   }
 
 }

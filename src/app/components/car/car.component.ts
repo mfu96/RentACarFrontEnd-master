@@ -45,9 +45,9 @@ export class CarComponent implements OnInit {
         {
           this.getCarsByBrandAndColor(params['brandId'], params['colorId']);
         }
-        else if (params['brandId']) {
-          this.getCarsByBrands(params['brandId'].split(',').map(Number));
-        }
+        // else if (params['brandId']) {
+        //   this.getCarsByBrands(params['brandId'].split(',').map(Number));
+        // }
       else if(params["brandId"]){
         this.getCarsByBrand(params["brandId"]);
       }
@@ -110,12 +110,12 @@ export class CarComponent implements OnInit {
     });
   }
 
-  getCarsByBrands(brandId: number[]) {
-    this.carService.getCarsByBrands(brandId).subscribe(response => {
-      this.cars = response.data;
-      this.dataLoaded = true;
-    });
-  }
+  // getCarsByBrands(brandId: number[]) {
+  //   this.carService.getCarsByBrands(brandId).subscribe(response => {
+  //     this.cars = response.data;
+  //     this.dataLoaded = true;
+  //   });
+  // }
   // getCarsByDetail(carId:number){
   //   this.carService.getCarsByDetail(carId).subscribe(response=>{
   //      this.carDetails =response.data;

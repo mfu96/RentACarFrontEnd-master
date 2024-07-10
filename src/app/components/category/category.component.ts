@@ -15,10 +15,10 @@ export class CategoryComponent implements OnInit {
   currentCategory:Category;
   filterText="";
   dataLoaded = false;
-  selecetedCategoryIds:number[]=[];
-  categoryForm=new FormGroup({
-    category:new FormControl(this.categories),
-  })
+  selectedCategoryIds:number[]=[];
+  // categoryForm=new FormGroup({
+  //   category:new FormControl(this.categories),
+  // })
 
   constructor(private categoryService: CategoryService,
     private router: Router,
@@ -55,31 +55,39 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  onBrandSelect(categoryId: number, event: any): void {
+  onCategorySelect(categoryId: number, event: any): void {
     if (event.target.checked) {
-      this.selecetedCategoryIds.push(categoryId);
+      this.selectedCategoryIds.push(categoryId);
     } else {
-      const index = this.selecetedCategoryIds.indexOf(categoryId);
+      const index = this.selectedCategoryIds.indexOf(categoryId);
       if (index > -1) {
-        this.selecetedCategoryIds.splice(index, 1);
+        this.selectedCategoryIds.splice(index, 1);
       }
     }
   }
 
   filterCars(): void {
-    const categoryIdsParam = this.selecetedCategoryIds.join(',');
+    const categoryIdsParam = this.selectedCategoryIds.join(',');
     this.router.navigate(['/cars/category', categoryIdsParam]);
 
-    const selectedCategoryNames = this.selecetedCategoryIds.map(id => {
+    const selectedCategoryNames = this.selectedCategoryIds.map(id => {
       const category = this.categories.find(c => c.categoryId === id);
       return category ? category.categoryName : '';
     }).join(', ');
 
-    this.toastrService.info(selectedCategoryNames +" listeleniyor.");
+    this.toastrService.info(selectedCategoryNames +" kategorisindeki araçlar listeleniyor.");
   
+}
+
+
+isFilterActive(): boolean {
+  return this.selectedCategoryIds.length > 0;
+}
+
+
 
 }
 
 
  
-}
+

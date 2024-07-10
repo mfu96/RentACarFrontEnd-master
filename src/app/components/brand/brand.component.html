@@ -64,7 +64,8 @@
     </div>
     
     <div class="mb-3 mt-3 d-flex justify-content-center">
-      <button class="btn btn-primary me-3" (click)="filterCars()" type="button">Filtrele</button>
+      <button class="btn btn-outline-primary me-3" (click)="filterCars()" 
+      type="button" [disabled]="!isFilterActive()">Filtrele</button>
     </div>
 
   </div>
