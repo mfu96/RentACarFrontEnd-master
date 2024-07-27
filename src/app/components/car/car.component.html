@@ -53,7 +53,7 @@
                     <td class="centered">{{car.brandId}}</td>
                     <td class="centered">{{car.colorId}}</td>
                     <td class="centered">{{car.modelYear}}</td>
-                    <td class="centered">{{car.unitPrice|currencySymbolSuffix:'₺'}}</td>
+                    <td class="centered">{{car.unitPrice| currency: currentCurrency}}</td>
                     <td class="centered">{{car.unitsInStock}}</td>
                     <td class="centered">{{car.description}}</td>
                 </tr>

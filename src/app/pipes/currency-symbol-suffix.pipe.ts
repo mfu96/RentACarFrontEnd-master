@@ -12,3 +12,4 @@ export class CurrencySymbolSuffixPipe implements PipeTransform {
     return `${valueWithoutSymbol} ${currencyCode}`;
   }
 }
+//Burayıı tarayıcıı diline göre para birimi ayarlaması yptııktan sonra kullanmayı bıraktım

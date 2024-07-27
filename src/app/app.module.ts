@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
@@ -33,6 +33,20 @@ import { HomeScreenComponent } from './components/home-screen/home-screen/home-s
 import { CurrencySymbolSuffixPipe } from './pipes/currency-symbol-suffix.pipe';
 
 
+import { registerLocaleData } from '@angular/common';
+import localeTr from '@angular/common/locales/tr';
+import localeEn from '@angular/common/locales/en';
+import localeDe from '@angular/common/locales/de';
+import localeFr from '@angular/common/locales/fr';
+import localeEs from '@angular/common/locales/es';
+import { LocaleService } from './services/locale.service';
+
+registerLocaleData(localeTr, 'tr');
+registerLocaleData(localeEn, 'en');
+registerLocaleData(localeDe, 'de');
+registerLocaleData(localeFr, 'fr');
+registerLocaleData(localeEs, 'es');
+
 
 
 
@@ -63,6 +77,7 @@ import { CurrencySymbolSuffixPipe } from './pipes/currency-symbol-suffix.pipe';
     CurrencySymbolSuffixPipe
     
     
+    
   ],
   imports: [
     BrowserModule,
@@ -78,6 +93,11 @@ import { CurrencySymbolSuffixPipe } from './pipes/currency-symbol-suffix.pipe';
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor, multi:true},
+    {
+      provide: LOCALE_ID,
+      deps: [LocaleService],
+      useFactory: (localeService: LocaleService) => localeService.getBrowserLocale()
+    }
   ],
   bootstrap: [AppComponent]
 })

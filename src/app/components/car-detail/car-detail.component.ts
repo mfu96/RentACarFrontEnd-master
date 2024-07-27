@@ -10,6 +10,7 @@ import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { CartService } from 'src/app/services/cart.service';
 import { LocalStorageService } from 'src/app/services/local-storge.service';
+import { LocaleService } from 'src/app/services/locale.service';
 import { RentalService } from 'src/app/services/rental.service';
 import { environment } from 'src/environments/environment';
 
@@ -27,6 +28,8 @@ export class CarDetailComponent implements OnInit {
   currentDetail: CarDetailDto;
   dataLoaded = false;
 
+  currentCurrency: string;
+
 
   // rental: Rental;
   // addRentCarForm: FormGroup;
@@ -39,12 +42,17 @@ export class CarDetailComponent implements OnInit {
     private carImageService: CarImageService,
     private activatedRoute: ActivatedRoute,
     private toastrService:ToastrService,
-    private cartService:CartService
+    private cartService:CartService,
+    private localeService: LocaleService
     
 
   ) { }
 
   ngOnInit(): void {
+
+    const locale = this.localeService.getBrowserLocale();
+    this.currentCurrency = this.localeService.getCurrencyByLocale(locale);
+    
     this.activatedRoute.params.subscribe((params) => {
       // if (params['categoryId']) {
       //   this.getCarsByCategory(params['categoryId']);

@@ -8,6 +8,7 @@ import { CarDetailDto } from 'src/app/models/entities/carDetailDto';
 import { Color } from 'src/app/models/entities/color';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
+import { LocaleService } from 'src/app/services/locale.service';
 
 @Component({
   selector: 'app-car',
@@ -25,6 +26,7 @@ export class CarComponent implements OnInit {
   carByDetail:CarDetailDto[]=[];
   currentCar:Car;
   dataLoaded = false;
+  currentCurrency:string
 
   carForm= new FormGroup({
     car: new FormControl(this.cars),
@@ -33,10 +35,15 @@ export class CarComponent implements OnInit {
   constructor(
     private carService: CarService,
     private activatedRoute: ActivatedRoute,
-    private toastrService:ToastrService
+    private toastrService:ToastrService,
+    private localeService:LocaleService
   ) {}
 
   ngOnInit(): void {
+
+    const locale = this.localeService.getBrowserLocale();
+    this.currentCurrency = this.localeService.getCurrencyByLocale(locale);
+    
     this.activatedRoute.params.subscribe((params) => {
       if (params['categoryId']) {
         this.getCarsByCategory(params['categoryId']);

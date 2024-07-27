@@ -53,19 +53,11 @@ export class RentalComponent implements OnInit {
       console.log("renatalComponentdeyim2")  
             this.getCustomer();
       }
-
       
     })
 
-    
-    
-
-       
-
- 
 
   }
-
 
   getEmail(customerId:number){
     let email= localStorage.getItem("email");
@@ -110,20 +102,17 @@ export class RentalComponent implements OnInit {
     }
     this.rentalService.addRental(rental).subscribe(response=>{
       this.toastrService.info("Ödeme sayfasına");
-      this.toastrService.success("Kiralama Başarılı");
+      this.toastrService.success(/*KiralamaBaşarılı*/ response.message);
       this.router.navigate(["/payment", JSON.stringify(rental)]);
     },error=>{
         console.info(error)
-        this.toastrService.error("Hata")
+        this.toastrService.error(error.error.message)
         this.toastrService.error("Hooop0000")
       }
 
 
       )
   }
-
-
-
 
 
 }
