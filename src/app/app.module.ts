@@ -40,6 +40,7 @@ import localeDe from '@angular/common/locales/de';
 import localeFr from '@angular/common/locales/fr';
 import localeEs from '@angular/common/locales/es';
 import { LocaleService } from './services/locale.service';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 registerLocaleData(localeTr, 'tr');
 registerLocaleData(localeEn, 'en');
@@ -74,7 +75,8 @@ registerLocaleData(localeEs, 'es');
     CartSummaryComponent,
     PaymentComponent,
     HomeScreenComponent,
-    CurrencySymbolSuffixPipe
+    CurrencySymbolSuffixPipe,
+    RegisterComponent
     
     
     

@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
 
           //this.localStorge.set('token',response.token );
           //console.log("login compponent login methodu3")
-          this.toastrService.info("Giriş Başarılı");
+          this.toastrService.success("Giriş Başarılı"+ response.message);
           this.router.navigate(['rentals/getdetails']);
           this.getUser(loginModel.email);
           console.log("login compponent login methodu4")

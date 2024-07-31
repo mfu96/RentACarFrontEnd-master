@@ -12,6 +12,7 @@ import { LoginGuard } from './guards/login.guard';
 import { CreditCardComponent } from './components/credit-card/credit-card/credit-card.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { HomeScreenComponent } from './components/home-screen/home-screen/home-screen.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 const routes: Routes = [
   { path:"", pathMatch:"full", component:RentalDetailComponent},
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path:"rental",component:RentalComponent},
 
   {path: "login", component:LoginComponent},
+  {path: "register", component:RegisterComponent},
+
 
   {path: "cars/getdetails", component:CarDetailComponent },
   {path: "customers/getdetails", component:CustomerDetailComponent},
