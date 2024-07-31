@@ -53,7 +53,9 @@
             <td>{{ detail.brandName }}</td>
             <td>{{ detail.colorName }}</td>
             <td>{{ detail.unitsInStock }}</td>
-            <td>{{ detail.unitPrice | currency :currentCurrency }} </td>
+            <!-- <td>{{ detail.unitPrice | currency :currentCurrency }} </td> -->
+            <td>{{ detail.unitPrice | currencySymbolSuffix }} </td>
+
             <td>{{detail.companyName}}</td>
             <td><button (click)="addToCartDetail(detail)" class="btn btn-success">Sepete Ekle</button></td>
        
