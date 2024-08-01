@@ -16,15 +16,14 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  user: User;
+  
   currentCustomerEmail: string = "";
 
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
-    private router: Router,
-    private localStorge: LocalStorageService,
-    private userService: UserService) { }
+    private router: Router
+   ) { }
 
   ngOnInit(): void {
 
@@ -71,7 +70,7 @@ export class LoginComponent implements OnInit {
           //console.log("login compponent login methodu3")
           this.toastrService.success("Giriş Başarılı"+ response.message);
           this.router.navigate(['rentals/getdetails']);
-          this.getUser(loginModel.email);
+          this.authService.setUser(loginModel.email);
           console.log("login compponent login methodu4")
 
         
@@ -105,21 +104,6 @@ export class LoginComponent implements OnInit {
     // }
 
 
-    
-   
-
-
   }
-
-  getUser(email:string){
-    this.userService.getByEmail(email).subscribe((response=>{
-      this.user=response.data;
-      console.info(this.user)
-      this.localStorge.set("fullName", this.user.firstName + " "+ this.user.lastName);
-      this.localStorge.set("email",this.user.email)
-
-
-
-    }))
-  }
+ 
 }

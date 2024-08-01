@@ -22,7 +22,13 @@
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" routerLink="/login">Giriş</button>
+        <ng-container *ngIf="isAuthenticated; else notLoggedIn">
+          <span class="me-2">Hoşgeldiniz, {{ userName }}</span>
+          <button class="btn btn-outline-danger" (click)="logout()">Çıkış Yap</button>
+        </ng-container>
+        <ng-template #notLoggedIn>
+          <button class="btn btn-outline-success" routerLink="/login">Giriş Yap</button>
+        </ng-template>
       </form>
     </div>
   </div>

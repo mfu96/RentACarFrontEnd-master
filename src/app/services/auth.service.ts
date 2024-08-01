@@ -8,14 +8,22 @@ import { ResponseModel } from '../models/responses/responseModel';
 import { SingleResponseModel } from '../models/responses/singleResponseModel';
 import { TokenModel } from '../models/tokenModel';
 import { LocalStorageService } from './local-storge.service';
+import { UserService } from './user.service';
+import { User } from '../models/entities/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   apiUrl =environment.apiUrl;
+  user: User;
+  isLogouted=false
+
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private userService:UserService,
+    private localStorage: LocalStorageService,
+
   ) {}
 
 
@@ -37,7 +45,7 @@ export class AuthService {
   }
 
 
-  isAuthenticated(){
+  isAuthenticated_old(){
     if(localStorage.getItem("token")){
       return true;
     }
@@ -45,6 +53,11 @@ export class AuthService {
       return false;
     }
   }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
 
    //190323 de commendlendi 
     //son gün dersiniden yardım alındı
@@ -61,10 +74,33 @@ export class AuthService {
 
 
 
-  logOut(){
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("email");
+  logOut() {
+    localStorage.removeItem('token');
+    //sessionStorage.removeItem("user");
+    localStorage.removeItem("email");
+
+    localStorage.removeItem('fullName');
+
+    //window.location.reload(); // Sayfayı yenileyerek değişiklikleri yansıt
+
+
+this.isLogouted=true
+
+  }
+
+  setUser(email:string){
+    this.userService.getByEmail(email).subscribe((response=>{
+      this.user=response.data;
+      console.info(this.user)
+      this.localStorage.set("fullName", this.user.firstName + " "+ this.user.lastName);
+      this.localStorage.set("email",this.user.email)
+        window.location.reload(); // Sayfayı yenileyerek değişiklikleri yansıt
+
+    }))
+  }
+  getUserName(): string {
+    return localStorage.getItem('fullName') || '';
+
   }
   
 }
