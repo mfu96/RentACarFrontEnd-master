@@ -40,7 +40,8 @@ export class AuthService {
   // }
 
   login(loginModel:LoginModel){
-    return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + 'auth/login',loginModel )
+    return this.httpClient.post<SingleResponseModel<TokenModel>>
+    (this.apiUrl + 'auth/login',loginModel )
 
   }
 
@@ -65,11 +66,9 @@ export class AuthService {
   //   return sessionStorage.getItem("token");   //!!!!
   // }
 
-  register(
-    registerModel: RegisterModel
-  ): Observable<SingleResponseModel<TokenModel>> {
+  register(registerModel: RegisterModel):Observable<SingleResponseModel<TokenModel>> {
     let newPath = this.apiUrl + 'auth/register';
-    return this.httpClient.post<SingleResponseModel<TokenModel>>(newPath,registerModel)
+    return this.httpClient.post<SingleResponseModel<TokenModel>>(newPath, registerModel)
   }
 
 
@@ -94,7 +93,7 @@ this.isLogouted=true
       console.info(this.user)
       this.localStorage.set("fullName", this.user.firstName + " "+ this.user.lastName);
       this.localStorage.set("email",this.user.email)
-        window.location.reload(); // Sayfayı yenileyerek değişiklikleri yansıt
+        //window.location.reload(); // Sayfayı yenileyerek değişiklikleri yansıt
 
     }))
   }

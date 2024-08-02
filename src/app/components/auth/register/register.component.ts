@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
   
       this.authService.register(registerModel).subscribe({
         next: (response: any) => {
-          this.toastrService.success("Kayıt başarılı!", response.message);
+          this.toastrService.success("QQQKayıt başarılı!");
   
           // Kayıt olduktan sonra otomatik giriş yap
 
@@ -73,7 +73,8 @@ export class RegisterComponent implements OnInit {
               localStorage.setItem('token', loginResponse.data.token);
               this.authService.setUser(loginModel.email);
               
-              this.toastrService.success("Otomatik giriş başarılı!");
+              this.toastrService.success(loginResponse.message+" Otomatik giriş başarılı!");
+              
               this.router.navigate(['rentals/getdetails']);
             },
             error: (loginError) => {

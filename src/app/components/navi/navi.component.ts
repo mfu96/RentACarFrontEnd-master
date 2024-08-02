@@ -20,7 +20,6 @@ export class NaviComponent implements OnInit {
   checkAuthStatus(): void {
     this.isAuthenticated = this.authService.isAuthenticated(); // Oturum açılmış mı?
     this.userName = this.authService.getUserName(); // Kullanıcı adını al
-    this.checkAuthStatus(); 
   }
 
   logout() {
