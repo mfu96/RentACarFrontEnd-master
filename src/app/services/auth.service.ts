@@ -17,8 +17,7 @@ import { User } from '../models/entities/user';
 export class AuthService {
   apiUrl =environment.apiUrl;
   user: User;
-  isLogouted=false
-
+ 
   constructor(
     private httpClient: HttpClient,
     private userService:UserService,
@@ -46,18 +45,22 @@ export class AuthService {
   }
 
 
-  isAuthenticated_old(){
-    if(localStorage.getItem("token")){
-      return true;
-    }
-    else{
+  isAuthenticated(): boolean {
+    if (localStorage.getItem("token")) {
+      if (this.checkTokenExpiration()) {
+        return true;
+      } else {
+        this.logOut();
+        return false;
+      }
+    } else {
       return false;
     }
   }
 
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
-  }
+  // isAuthenticated_old(): boolean {
+  //   return !!localStorage.getItem('token');
+  // }
 
 
    //190323 de commendlendi 
@@ -74,16 +77,17 @@ export class AuthService {
 
 
   logOut() {
+
     localStorage.removeItem('token');
-    //sessionStorage.removeItem("user");
+    localStorage.removeItem('expiration');
+
     localStorage.removeItem("email");
 
     localStorage.removeItem('fullName');
 
-    //window.location.reload(); // Sayfayı yenileyerek değişiklikleri yansıt
+    window.location.reload(); // Sayfayı yenileyerek değişiklikleri yansıt
 
 
-this.isLogouted=true
 
   }
 
@@ -93,13 +97,23 @@ this.isLogouted=true
       console.info(this.user)
       this.localStorage.set("fullName", this.user.firstName + " "+ this.user.lastName);
       this.localStorage.set("email",this.user.email)
-        //window.location.reload(); // Sayfayı yenileyerek değişiklikleri yansıt
+        window.location.reload(); // Sayfayı yenileyerek değişiklikleri yansıt
 
     }))
   }
   getUserName(): string {
     return localStorage.getItem('fullName') || '';
 
+  }
+
+  checkTokenExpiration(): boolean {
+    const expiration = localStorage.getItem('expiration');
+    if (expiration) {
+      const now = new Date().getTime();
+      const expirationDate = new Date(expiration).getTime();
+      return now < expirationDate;
+    }
+    return false;
   }
   
 }

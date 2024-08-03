@@ -64,11 +64,13 @@ export class LoginComponent implements OnInit {
           console.log("login compponent login methodu1")
           //this.toastrService.info(response.message);
          localStorage.setItem('token',response.data.token )
+         localStorage.setItem('expiration',response.data.expiration )
+
           //console.log("login compponent login methodu2")
 
           //this.localStorge.set('token',response.token );
           //console.log("login compponent login methodu3")
-          this.toastrService.success("Giriş Başarılı"+ response.message);
+          //this.toastrService.success("Giriş Başarılı"+ response.message);
           this.router.navigate(['rentals/getdetails']);
           this.authService.setUser(loginModel.email);
           console.log("login compponent login methodu4")

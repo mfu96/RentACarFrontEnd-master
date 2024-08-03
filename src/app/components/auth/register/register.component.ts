@@ -71,14 +71,15 @@ export class RegisterComponent implements OnInit {
           this.authService.login(loginModel).subscribe({
             next: (loginResponse: any) => {
               localStorage.setItem('token', loginResponse.data.token);
+              localStorage.setItem('expiration', loginResponse.data.expiration )
+
               this.authService.setUser(loginModel.email);
               
-              this.toastrService.success(loginResponse.message+" Otomatik giriş başarılı!");
               
               this.router.navigate(['rentals/getdetails']);
             },
             error: (loginError) => {
-              this.toastrService.error(loginError.error, 'Otomatik giriş başarısız.');
+              this.toastrService.error(loginError.error, 'Giriş başarısız.');
             }
           });
         },
